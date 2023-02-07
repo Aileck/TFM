@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/AstarPathfindingProject/ExampleScenes/Example3_Recast_Navmesh1/RecastExample.unity
+- path: Assets/QA_Office/Demo scene/QA_Office_demoScene_Level_00.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
