@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/AstarPathfindingProject/ExampleScenes/Example3_Recast_Navmesh1/RecastExample.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0
