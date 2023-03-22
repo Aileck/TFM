@@ -310,7 +310,6 @@ GameObject:
   - component: {fileID: 8494549739950380971}
   - component: {fileID: 8494549739950380970}
   - component: {fileID: 8494549739950380975}
-  - component: {fileID: 698050191946375969}
   - component: {fileID: 698050190857503281}
   m_Layer: 0
   m_Name: Generic model
@@ -421,25 +420,6 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
---- !u!95 &698050191946375969
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 487337559828320038}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2d25a2cdab362844aaa3ddb804f55059, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &698050190857503281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +435,8 @@ MonoBehaviour:
   mc: {fileID: 3421081702336190176, guid: 5ca50bc43632ef3449005d6bf4e302ec, type: 3}
   itsModel: 0
   itsRol: 0
+  itsPosition: 0
+  itsDestination: 0
 --- !u!1 &552611934575560554
 GameObject:
   m_ObjectHideFlags: 0

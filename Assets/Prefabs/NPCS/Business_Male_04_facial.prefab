@@ -1329,7 +1329,7 @@ MonoBehaviour:
   radius: 0.5
   height: 2
   canMove: 1
-  maxSpeed: 1
+  maxSpeed: 1.5
   gravity: {x: NaN, y: NaN, z: NaN}
   groundMask:
     serializedVersion: 2
@@ -1383,6 +1383,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myModel: 0
   myRol: 0
+  myPos: 0
+  myDestination: 
+  myState: 0
+  moveSpeed: 1
+  animSpeed: 1
 --- !u!95 &3551483853284254111
 Animator:
   serializedVersion: 3

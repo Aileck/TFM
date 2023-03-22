@@ -23,15 +23,42 @@ public class GenericModel : MonoBehaviour
 
     }
 
+    public enum POSITON {
+        STAND,
+        SIT,
+        MOVMENT
+    }
+
     public enum ROL
     {
         ANGRY,
-        EXITED
+        EXITED,
+        TYPE,
+        LAUGHT,
+        TALK,
+        NO_TALK,
+        TALK_LESS,
+        LEAN,
+        PRESENT,
+        LISTEN,
+        KNOCK,
+        COFEE,
+        ARGUING,
+        YELLING
+    }
+
+    public enum DESTINATION
+    {
+        DOOR1,
+        DOOR2
     }
 
     public ModelCollector mc;
     public GenericModel.MODEL itsModel;
     public GenericModel.ROL itsRol;
+    public GenericModel.POSITON itsPosition;
+    public GenericModel.DESTINATION itsDestination;
+    string[] doorTags = { "Door1", "Door2" };
 
     void Start()
     {
@@ -52,6 +79,8 @@ public class GenericModel : MonoBehaviour
         this.transform.GetChild(1).gameObject.SetActive(false);
 
         thisNPC.GetComponent<NPCBeh2>().SetRol(itsRol);
+        thisNPC.GetComponent<NPCBeh2>().SetPosition(itsPosition);
+        thisNPC.GetComponent<NPCBeh2>().SetDestination(doorTags[(int)itsDestination]);
 
         //thisNPC.transform.SetParent(this.gameObject.transform);
     }
@@ -60,5 +89,14 @@ public class GenericModel : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetModel(MODEL model) {
+        this.itsModel = model;
+    }
+
+    public void SetRol(ROL rol, POSITON pos = POSITON.STAND) {
+        this.itsRol = rol;
+        itsPosition = pos;
     }
 }

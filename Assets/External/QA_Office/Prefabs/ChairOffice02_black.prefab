@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 4864856623318188}
   - component: {fileID: 205599973130235788}
   - component: {fileID: 1674065783}
-  m_Layer: 0
+  - component: {fileID: 2956442010540752193}
+  m_Layer: 2
   m_Name: ChairOffice02_black
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -64,13 +65,31 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1047836853086272}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f83ce7d388a38234abdd5f83093a138e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   businessmanPrefabs:
   - {fileID: 1111445859100566353, guid: b45cba6d20598644e996f3be595b8256, type: 3}
+--- !u!114 &2956442010540752193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047836853086272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b308b8f2e4bc29469cc82f9ea17804e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itsModel: 11
+  itsRol: 0
+  itsPosition: 1
+  genericModel: {fileID: 487337559828320038, guid: 7d8ed20250e65b042bf3216f17b117ea,
+    type: 3}
+  m_Thrust: 0
 --- !u!1 &1412914203781260
 GameObject:
   m_ObjectHideFlags: 0
@@ -83,7 +102,7 @@ GameObject:
   - component: {fileID: 33251989567965450}
   - component: {fileID: 23752712632658600}
   - component: {fileID: 64221630536094368}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ChairOffice02_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,7 +195,7 @@ GameObject:
   - component: {fileID: 4225004688225488}
   - component: {fileID: 33562096607078546}
   - component: {fileID: 23041749233169378}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ChairOffice02_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

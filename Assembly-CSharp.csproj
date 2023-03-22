@@ -79,6 +79,7 @@
     <Compile Include="Assets\Scipt\Movment.cs" />
     <Compile Include="Assets\Scipt\NPCBeh2.cs" />
     <Compile Include="Assets\Scipt\NPCBehaviour.cs" />
+    <Compile Include="Assets\Scipt\NPCGenerator.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />

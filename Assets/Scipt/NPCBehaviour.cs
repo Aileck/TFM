@@ -50,8 +50,6 @@ public class NPCBehaviour : MonoBehaviour
 
         }
 
-
-
     }
 
     public void SetToStand() {

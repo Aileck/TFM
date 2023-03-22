@@ -448,13 +448,29 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369252289}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f83ce7d388a38234abdd5f83093a138e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   businessmanPrefabs:
   - {fileID: 1111445859100566353, guid: b45cba6d20598644e996f3be595b8256, type: 3}
+--- !u!114 &369252295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369252289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b308b8f2e4bc29469cc82f9ea17804e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itsModel: 0
+  itsRol: 4
+  genericModel: {fileID: 487337559828320038, guid: 7d8ed20250e65b042bf3216f17b117ea,
+    type: 3}
 --- !u!1 &494851546
 GameObject:
   m_ObjectHideFlags: 0
@@ -2608,7 +2624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013838664482, guid: f71bb1787561b5542902c3c6983f9d77, type: 3}
       propertyPath: m_TagString
-      value: Chair
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000013838664482, guid: f71bb1787561b5542902c3c6983f9d77, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4000014004663578, guid: f71bb1787561b5542902c3c6983f9d77, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3064,6 +3084,11 @@ PrefabInstance:
         type: 3}
       propertyPath: itsModel
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 698050190857503281, guid: 7d8ed20250e65b042bf3216f17b117ea,
+        type: 3}
+      propertyPath: itsRol
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3501556635918351669, guid: 7d8ed20250e65b042bf3216f17b117ea,
         type: 3}
