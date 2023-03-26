@@ -27,13 +27,9 @@ public class NPCBeh2 : MonoBehaviour
 
     int myRunStyle = 0;
 
-    //Smooth animation
-
-    public float moveSpeed = 1.0f;      
-    public float animSpeed = 1.0f;      
-
-    private Vector3 lastPosition;       
-    private float distance;             
+    //Face Expression Variable
+    float mouthBlendShape = 0;
+    bool openmouth = true;
 
     void Start()
     {
@@ -99,6 +95,11 @@ public class NPCBeh2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!LevelManager.fire && myState == State.BEFORE)
+        {
+            FaceExpressionControl();
+
+        }
         if (LevelManager.fire && myState == State.BEFORE)
         {
             anim.SetTrigger("fire");
@@ -106,28 +107,41 @@ public class NPCBeh2 : MonoBehaviour
 
             myState = State.PREPARING;
 
+            //Face expression
+            FaceExpressionControl();
+
         }
 
         if (LevelManager.fire && myState == State.PREPARING)
         {
             AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("Shock sit") && stateInfo.normalizedTime >= 0.25f){
 
+                //Access to top parent (chair) that is ready
+                Transform topParent = transform;
+                while (!topParent.GetComponent<NPCGenerator>())
+                {
+                    topParent = topParent.parent;
+                }
+                if(topParent.GetComponent<NPCGenerator>() != null)
+                    topParent.gameObject.GetComponent<NPCGenerator>().SetReady();
+
+
+            }
             if ((stateInfo.IsName("Shock stand") || stateInfo.IsName("Shock sit")) && stateInfo.normalizedTime >= 0.80f)
             {
-                Debug.Log("Pre run animation has finished.");
+                //Debug.Log("Pre run animation has finished.");
                 //anim.SetInteger("run_style", myRunStyle);
 
                 pathfinding.target = GameObject.FindGameObjectWithTag(myDestination).transform;
 
                 this.myState = State.ESCAPING;
-
-                lastPosition = transform.position;
             }
 
         }
 
         if (LevelManager.fire && myState == State.ESCAPING) {
-            Debug.Log("My model " + (int)myModel  + " " + ai.velocity.magnitude);
+            //Debug.Log("My model " + (int)myModel  + " " + ai.velocity.magnitude);
             anim.SetFloat("Speed", ai.velocity.magnitude);
             anim.applyRootMotion = true;
             //SmoothMovement();
@@ -147,29 +161,50 @@ public class NPCBeh2 : MonoBehaviour
         myDestination = destination;
     }
 
-    void SmoothMovement() {
-        // 获取目标位置
-        Vector3 targetPosition = pathfinding.target.transform.position;
 
-        // 计算当前位置和目标位置之间的距离
-        distance = Vector3.Distance(transform.position, targetPosition);
+    void FaceExpressionControl()
+    {
+        //Talk
+        if(myRol == GenericModel.ROL.EXITED ||
+            myRol == GenericModel.ROL.ARGUING ||
+            myRol == GenericModel.ROL.YELLING ||
+            myRol == GenericModel.ROL.TALK ||
+            myRol == GenericModel.ROL.NO_TALK)
+        {
+            mouthBlendShape = Mathf.Lerp(mouthBlendShape, 100, Time.deltaTime * 0.5F);
 
-        // 根据距离调整移动速度和动画播放速度
-        float t = Mathf.Clamp01(distance / 2.0f);
-        float moveSpeedAdjusted = Mathf.Lerp(ai.maxSpeed, 0.0f, t);
-        float animSpeedAdjusted = Mathf.Lerp(animSpeed, 0.0f, t);
+            SkinnedMeshRenderer skinnedMeshRenderer = transform.GetChild(1).GetComponent<SkinnedMeshRenderer>();
+            Mesh mesh = skinnedMeshRenderer.sharedMesh;
+            int mouthO = mesh.GetBlendShapeIndex("AA_VL_13_O");
+            skinnedMeshRenderer.SetBlendShapeWeight(13, mouthBlendShape);
+            if(myRol == GenericModel.ROL.EXITED) {
+                skinnedMeshRenderer.SetBlendShapeWeight(25, mouthBlendShape);
 
-        // 计算当前位置和目标位置之间的方向
-        Vector3 direction = (targetPosition - transform.position).normalized;
+            }
 
-        // 移动角色
-        transform.position += direction * moveSpeedAdjusted * Time.deltaTime;
 
-        // 播放动画
-        anim.speed = animSpeedAdjusted;
 
-        // 更新上一帧的位置
-        lastPosition = transform.position;
+
+
+            if (openmouth)
+            {
+                mouthBlendShape = Mathf.Lerp(mouthBlendShape, 100, Time.deltaTime * 5F);
+
+                if(mouthBlendShape >= 90)
+                {
+                    openmouth = false;
+                }
+            }
+
+            else if (!openmouth)
+            {
+                mouthBlendShape = Mathf.Lerp(mouthBlendShape, 0, Time.deltaTime * 5F);
+                if (mouthBlendShape <= 10)
+                {
+                    openmouth = true;
+                }
+            }
+        }
     }
 
 }

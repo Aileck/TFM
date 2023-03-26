@@ -10,8 +10,11 @@ public class NPCGenerator : MonoBehaviour
     public GenericModel.POSITON itsPosition = GenericModel.POSITON.SIT;
     public GameObject genericModel;
 
+    public GameObject myNPC;
+
     public float m_Thrust;
-    bool pushed = false;
+    bool pushed;
+    bool ready;
     float amountGoBack = 9;
 
     void Start()
@@ -20,20 +23,36 @@ public class NPCGenerator : MonoBehaviour
         thisNPC.GetComponent<GenericModel>().SetModel(itsModel);
         thisNPC.GetComponent<GenericModel>().SetRol(itsRol, itsPosition);
 
-        thisNPC.transform.SetParent(null);
+        myNPC = thisNPC;
+        pushed = false;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (LevelManager.fire && pushed == false)
+        //Debug.Log("Pushed"+pushed);
+        if(LevelManager.fire)
+        {
+            this.gameObject.layer = 0;
+            transform.GetChild(0).gameObject.layer = 0;
+            transform.GetChild(1).gameObject.layer = 0;
+        }
+        if (LevelManager.fire && pushed == false && ready && this.GetComponent<Rigidbody>() != null)
         {
             //this.transform.position-= Vector3.left * Time.deltaTime;
             //this.transform.GetChild(0).transform.position -= Vector3.left * Time.deltaTime;
             //this.transform.GetChild(1).transform.position -= Vector3.left * Time.deltaTime;
 
-            transform.Translate(Vector3.back * 50);
+
+            //transform.Translate(Vector3.back);
+
+
+            Vector3 backwardForce = new Vector3(0, 0, -1);
+
+            this.GetComponent<Rigidbody>().AddForce(backwardForce, ForceMode.Impulse);
             pushed = true;
+
+
 
         }
 
@@ -43,5 +62,9 @@ public class NPCGenerator : MonoBehaviour
 
 
 
+    }
+
+    public void SetReady() {
+        ready = true;
     }
 }

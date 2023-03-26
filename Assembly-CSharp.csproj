@@ -1171,6 +1171,10 @@
       <Project>{D0962818-CAD7-F3D3-2F91-17AA1712FEE0}</Project>
       <Name>TobiiXRG2OM</Name>
     </ProjectReference>
+    <ProjectReference Include="EM.AutoSave.Editor.csproj">
+      <Project>{62C2EC61-9353-422F-AC0D-155805497603}</Project>
+      <Name>EM.AutoSave.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="TobiiXRDevTools.csproj">
       <Project>{C52704DD-6BCB-450A-67B7-3F73A1B682B0}</Project>
       <Name>TobiiXRDevTools</Name>
