@@ -634,8 +634,6 @@ MonoBehaviour:
   myPos: 0
   myDestination: 
   myState: 0
-  moveSpeed: 1
-  animSpeed: 1
 --- !u!95 &7379504702528607201
 Animator:
   serializedVersion: 3

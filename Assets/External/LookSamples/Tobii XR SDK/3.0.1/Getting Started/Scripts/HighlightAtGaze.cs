@@ -23,6 +23,7 @@ namespace Tobii.XR.Examples.GettingStarted
             if (hasFocus)
             {
                 _targetColor = highlightColor;
+                Debug.Log("Be looked");
             }
             //If this object lost focus, fade the object's color to it's original color
             else

@@ -169,7 +169,7 @@ public class NPCBeh2 : MonoBehaviour
             myRol == GenericModel.ROL.ARGUING ||
             myRol == GenericModel.ROL.YELLING ||
             myRol == GenericModel.ROL.TALK ||
-            myRol == GenericModel.ROL.NO_TALK)
+            myRol == GenericModel.ROL.PRESENT)
         {
             mouthBlendShape = Mathf.Lerp(mouthBlendShape, 100, Time.deltaTime * 0.5F);
 
