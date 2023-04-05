@@ -70,6 +70,7 @@
     <Compile Include="Assets\External\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\Scipt\BusinessManGenerator.cs" />
+    <Compile Include="Assets\Scipt\Example.cs" />
     <Compile Include="Assets\Scipt\GameManager\LevelManager.cs" />
     <Compile Include="Assets\Scipt\GameManager\SceneManager.cs" />
     <Compile Include="Assets\Scipt\GenericModel.cs" />
@@ -77,9 +78,10 @@
     <Compile Include="Assets\Scipt\JsonWriter.cs" />
     <Compile Include="Assets\Scipt\ModelCollector.cs" />
     <Compile Include="Assets\Scipt\Movment.cs" />
-    <Compile Include="Assets\Scipt\NPCBeh2.cs" />
     <Compile Include="Assets\Scipt\NPCBehaviour.cs" />
+    <Compile Include="Assets\Scipt\NPCBehaviour2.cs" />
     <Compile Include="Assets\Scipt\NPCGenerator.cs" />
+    <Compile Include="Assets\SoundController.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_GazeTracker.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_LaserPointer.cs" />
     <Compile Include="Assets\SteamVR\Extras\SteamVR_Teleporter.cs" />

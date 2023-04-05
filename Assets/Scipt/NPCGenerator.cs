@@ -7,7 +7,7 @@ public class NPCGenerator : MonoBehaviour
     // Start is called before the first frame update
     public GenericModel.MODEL itsModel;
     public GenericModel.ROL itsRol;
-    public GenericModel.POSITON itsPosition = GenericModel.POSITON.SIT;
+    public GenericModel.POSITION itsPosition = GenericModel.POSITION.SIT;
     public GameObject genericModel;
 
     public GameObject myNPC;
@@ -60,11 +60,11 @@ public class NPCGenerator : MonoBehaviour
         //amountGoBack -= Time.deltaTime;
 
 
-
-
     }
 
     public void SetReady() {
         ready = true;
     }
+
+
 }

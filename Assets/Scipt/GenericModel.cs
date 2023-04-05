@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class GenericModel : MonoBehaviour
 {
     // Start is called before the first frame update
+
     public enum MODEL
     {
         FEMALE_1,
@@ -23,42 +25,62 @@ public class GenericModel : MonoBehaviour
 
     }
 
-    public enum POSITON {
+    public enum POSITION {
         STAND,
         SIT,
-        MOVMENT
+        MOVEMENT
     }
 
     public enum ROL
     {
+        //Stand
         ANGRY,
         EXITED,
         TYPE,
-        LAUGHT,
-        TALK,
-        NO_TALK,
-        TALK_LESS,
         LEAN,
         PRESENT,
         LISTEN,
         KNOCK,
         COFEE,
         ARGUING,
-        YELLING
+        YELLING,
+
+        //Sit
+        LAUGHT,
+        TALK,
+        NO_TALK,
+        TALK_LESS,
+
+        //Movment
+        PATROL
+        
     }
+    private ROL[] standRols = { ROL.ANGRY, ROL.EXITED, ROL.TYPE, ROL.LEAN, ROL.PRESENT, ROL.LISTEN, ROL.KNOCK, ROL.COFEE, ROL.ARGUING, ROL.YELLING };
+    private ROL[] sitRols = { ROL.LAUGHT, ROL.TALK, ROL.NO_TALK, ROL.TALK_LESS };
+    private ROL[] movementRols = { ROL.PATROL };
 
     public enum DESTINATION
     {
         DOOR1,
         DOOR2
     }
-
-    public ModelCollector mc;
-    public GenericModel.MODEL itsModel;
-    public GenericModel.ROL itsRol;
-    public GenericModel.POSITON itsPosition;
-    public GenericModel.DESTINATION itsDestination;
+    [SerializeField]
+    ModelCollector mc;
+    [SerializeField]
+    GenericModel.MODEL itsModel;
+    [SerializeField]
+    GenericModel.ROL itsRol;
+    [SerializeField]
+    GenericModel.POSITION itsPosition;
+    [SerializeField]
+    GenericModel.DESTINATION itsDestination;
+    [SerializeField]
+    GameObject[] itsBeforeFireDestination;
     string[] doorTags = { "Door1", "Door2" };
+
+    [SerializeField]
+    GenericModel.ROL itsRol2;
+
 
     void Start()
     {
@@ -78,9 +100,11 @@ public class GenericModel : MonoBehaviour
         this.transform.GetChild(0).gameObject.SetActive(false);
         this.transform.GetChild(1).gameObject.SetActive(false);
 
-        thisNPC.GetComponent<NPCBeh2>().SetRol(itsRol);
-        thisNPC.GetComponent<NPCBeh2>().SetPosition(itsPosition);
-        thisNPC.GetComponent<NPCBeh2>().SetDestination(doorTags[(int)itsDestination]);
+        thisNPC.GetComponent<NPCBehaviour2>().SetRol(itsRol);
+        thisNPC.GetComponent<NPCBehaviour2>().SetPosition(itsPosition);
+        thisNPC.GetComponent<NPCBehaviour2>().SetDestination(doorTags[(int)itsDestination]);
+        thisNPC.GetComponent<NPCBehaviour2>().SetBeforeDestination(itsBeforeFireDestination);
+
 
         //thisNPC.transform.SetParent(this.gameObject.transform);
     }
@@ -95,8 +119,11 @@ public class GenericModel : MonoBehaviour
         this.itsModel = model;
     }
 
-    public void SetRol(ROL rol, POSITON pos = POSITON.STAND) {
+    public void SetRol(ROL rol, POSITION pos = POSITION.STAND) {
         this.itsRol = rol;
         itsPosition = pos;
     }
+
+
+
 }
