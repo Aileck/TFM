@@ -5,8 +5,13 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
     // Start is called before the first frame update
-    public AudioClip[] walkStepsHeels;
-    public AudioClip[] walkFastStepsHeels;
+    public AudioClip[] stepsBusinessFemale;
+
+    public AudioClip[] stepsBusinessMale;
+
+    public AudioClip[] stepsSecurity;
+
+    public AudioClip[] stepsTechnical;
 
     public NPCBehaviour2 npc;
     public GenericModel.MODEL myModel;
@@ -31,9 +36,9 @@ public class SoundController : MonoBehaviour
 
         if (myModel == GenericModel.MODEL.FEMALE_1 || myModel == GenericModel.MODEL.FEMALE_2 || myModel == GenericModel.MODEL.FEMALE_3 ||
             myModel == GenericModel.MODEL.FEMALE_4) {
-            int r = Random.Range(0, walkStepsHeels.Length - 1);
+            int r = Random.Range(0, stepsTechnical.Length - 1);
 
-            audioS.PlayOneShot(walkStepsHeels[r]);
+            audioS.PlayOneShot(stepsTechnical[r]);
         
         }
     }
