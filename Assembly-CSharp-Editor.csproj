@@ -662,8 +662,23 @@
     <Reference Include="Unity.Subsystem.Registration">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.OpenVR">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.OpenVR.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.OpenVR.Editor">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.OpenVR.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.ARSubsystems">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.ARSubsystems.Editor">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.InteractionSubsystems">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -692,8 +707,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.WindowsMixedReality.Editor">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.WindowsMixedReality">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>

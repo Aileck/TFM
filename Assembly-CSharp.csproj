@@ -63,12 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ArguingMusicController.cs" />
-    <Compile Include="Assets\External\LookSamples\Tobii XR SDK\3.0.1\Getting Started\Scripts\HighlightAtGaze.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\MusicController.cs" />
+    <Compile Include="Assets\Samples\Tobii XR SDK\3.0.1\Getting Started\Scripts\HighlightAtGaze.cs" />
     <Compile Include="Assets\Scipt\BusinessManGenerator.cs" />
     <Compile Include="Assets\Scipt\Example.cs" />
     <Compile Include="Assets\Scipt\GameManager\LevelManager.cs" />
@@ -562,6 +562,33 @@
     <Compile Include="Assets\ViveSR\Scripts\SRWorks_Enums.cs" />
     <Compile Include="Assets\ViveSR\Scripts\SRanipal_API.cs" />
     <Compile Include="Assets\ViveSR\Scripts\SRanipal_Enums.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo_ArcadeSession.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo_DLC.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo_Deeplink.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo_IAP.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo_MainThreadDispatcher.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportDemo_Subscription.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportPreviewDemo_DLC.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportPreviewDemo_IAP.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportPreviewDemo_UserStats.cs" />
+    <Compile Include="Assets\Viveport\Example\Scripts\ViveportPreviewDemo_ViveportArcadeSession.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\IJsonWrapper.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\JsonData.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\JsonException.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\JsonMapper.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\JsonReader.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\JsonWriter.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\Lexer.cs" />
+    <Compile Include="Assets\Viveport\Scripts\LitJson\ParserToken.cs" />
+    <Compile Include="Assets\Viveport\Scripts\MainThreadDispatcher.cs" />
+    <Compile Include="Assets\Viveport\Scripts\PEMKeyLoader.cs" />
+    <Compile Include="Assets\Viveport\Scripts\Viveport.cs" />
+    <Compile Include="Assets\Viveport\Scripts\Viveport_Internal.cs" />
+    <Compile Include="Assets\Viveport\Scripts\Viveport_Internal_Android.cs" />
+    <Compile Include="Assets\Viveport\Scripts\Viveport_Internal_Android_Preview.cs" />
+    <Compile Include="Assets\Viveport\Scripts\Viveport_Internal_Preview.cs" />
+    <Compile Include="Assets\Viveport\Scripts\Viveport_Preview.cs" />
     <None Include="Assets\External\QA_Office\ReadMe.txt" />
     <None Include="Assets\SteamVR\Resources\SteamVR_ClearAll.shader" />
     <None Include="Assets\ViveSR\Shaders\Unlit-Alpha2Gray.shader" />
@@ -1130,8 +1157,23 @@
     <Reference Include="Unity.Subsystem.Registration">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.OpenVR">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.OpenVR.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.OpenVR.Editor">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.OpenVR.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.ARSubsystems">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.ARSubsystems.Editor">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.InteractionSubsystems">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -1160,8 +1202,14 @@
     <Reference Include="UnityEngine.SpatialTracking">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.XR.WindowsMixedReality.Editor">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.XR.WindowsMixedReality">
+      <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
       <HintPath>E:/Xinyu/TFM/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
