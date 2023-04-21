@@ -1291,6 +1291,7 @@ GameObject:
   - component: {fileID: -9093221468535673210}
   - component: {fileID: 3673105704382022306}
   - component: {fileID: -1542414190555900463}
+  - component: {fileID: 5695611912395895047}
   m_Layer: 0
   m_Name: Business_Female_01_facial 1
   m_TagString: Untagged
@@ -1483,9 +1484,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 52e741d80683e534da694176faab5bb5, type: 3}
   - {fileID: 8300000, guid: b1e65c6770925f841a74804c47769553, type: 3}
   - {fileID: 8300000, guid: c25ca4ea96a5a8046afdca71e6dea0b0, type: 3}
-  npc: {fileID: 0}
-  myModel: 0
-  audioS: {fileID: 0}
 --- !u!82 &-1542414190555900463
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1495,7 +1493,8 @@ AudioSource:
   m_GameObject: {fileID: 3541378784645535793}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 1060788506182524626, guid: 4d23d23c079f626408d5b690b556efa7,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -1507,7 +1506,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 600
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1542,7 +1541,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0.6
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1582,6 +1581,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!143 &5695611912395895047
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3541378784645535793}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &3580087210413888987
 GameObject:
   m_ObjectHideFlags: 0

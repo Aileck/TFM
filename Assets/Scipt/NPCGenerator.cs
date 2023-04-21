@@ -8,20 +8,23 @@ public class NPCGenerator : MonoBehaviour
     public GenericModel.MODEL itsModel;
     public GenericModel.ROL itsRol;
     public GenericModel.POSITION itsPosition = GenericModel.POSITION.SIT;
+    public GenericModel.REACTION_TIME_TO_RUN itsReactopmTime;
     public GameObject genericModel;
+    public GameObject[] itsBeforeFireDestination;
 
     public GameObject myNPC;
 
     public float m_Thrust;
     bool pushed;
     bool ready;
-    float amountGoBack = 9;
 
     void Start()
     {
         GameObject thisNPC = Instantiate(genericModel, this.transform.position, this.transform.rotation, this.transform);
         thisNPC.GetComponent<GenericModel>().SetModel(itsModel);
         thisNPC.GetComponent<GenericModel>().SetRol(itsRol, itsPosition);
+        thisNPC.GetComponent<GenericModel>().SetBeforeDestination(itsBeforeFireDestination);
+        thisNPC.GetComponent<GenericModel>().SetReactionTime(itsReactopmTime) ;
 
         myNPC = thisNPC;
         pushed = false;
@@ -37,7 +40,7 @@ public class NPCGenerator : MonoBehaviour
             transform.GetChild(0).gameObject.layer = 0;
             transform.GetChild(1).gameObject.layer = 0;
         }
-        if (LevelManager.fire && pushed == false && ready && this.GetComponent<Rigidbody>() != null)
+        if (itsPosition != GenericModel.POSITION.MOVEMENT && (LevelManager.fire && pushed == false && ready && this.GetComponent<Rigidbody>() != null))
         {
             //this.transform.position-= Vector3.left * Time.deltaTime;
             //this.transform.GetChild(0).transform.position -= Vector3.left * Time.deltaTime;

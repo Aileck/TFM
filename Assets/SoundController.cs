@@ -13,10 +13,10 @@ public class SoundController : MonoBehaviour
 
     public AudioClip[] stepsTechnical;
 
-    public NPCBehaviour2 npc;
-    public GenericModel.MODEL myModel;
+    NPCBehaviour2 npc;
+    GenericModel.MODEL myModel;
 
-    public AudioSource audioS;
+    AudioSource audioS;
 
     void Start()
     {
@@ -35,11 +35,35 @@ public class SoundController : MonoBehaviour
     public void FootSteps() {
 
         if (myModel == GenericModel.MODEL.FEMALE_1 || myModel == GenericModel.MODEL.FEMALE_2 || myModel == GenericModel.MODEL.FEMALE_3 ||
-            myModel == GenericModel.MODEL.FEMALE_4) {
+            myModel == GenericModel.MODEL.FEMALE_4 || myModel == GenericModel.MODEL.FEMALE_5 || myModel == GenericModel.MODEL.FEMALE_6
+            || myModel == GenericModel.MODEL.FEMALE_7 ) {
+            int r = Random.Range(0, stepsBusinessFemale.Length - 1);
+            Debug.Log(myModel +" nOW PLAYING");
+            audioS.PlayOneShot(stepsBusinessFemale[r]);
+        
+        }
+
+        if (myModel == GenericModel.MODEL.MALE_1 || myModel == GenericModel.MODEL.MALE_2 || myModel == GenericModel.MODEL.MALE_3 ||
+            myModel == GenericModel.MODEL.MALE_4 || myModel == GenericModel.MODEL.MALE_5 || myModel == GenericModel.MODEL.MALE_6
+    ||      myModel == GenericModel.MODEL.MALE_7 || myModel == GenericModel.MODEL.MALE_8)
+        {
+            int r = Random.Range(0, stepsBusinessMale.Length - 1);
+
+            audioS.PlayOneShot(stepsBusinessMale[r]);
+
+        }
+
+        if (myModel == GenericModel.MODEL.SECURE_1 || myModel == GenericModel.MODEL.SECURE_2) {
+            int r = Random.Range(0, stepsSecurity.Length - 1);
+
+            audioS.PlayOneShot(stepsSecurity[r]);
+        }
+
+        if (myModel == GenericModel.MODEL.TECH1)
+        {
             int r = Random.Range(0, stepsTechnical.Length - 1);
 
             audioS.PlayOneShot(stepsTechnical[r]);
-        
         }
     }
 }

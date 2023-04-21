@@ -64,11 +64,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\ArguingMusicController.cs" />
     <Compile Include="Assets\External\LookSamples\Tobii XR SDK\3.0.1\Getting Started\Scripts\HighlightAtGaze.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\ElevatorManager.cs" />
+    <Compile Include="Assets\MusicController.cs" />
     <Compile Include="Assets\Scipt\BusinessManGenerator.cs" />
     <Compile Include="Assets\Scipt\Example.cs" />
     <Compile Include="Assets\Scipt\GameManager\LevelManager.cs" />
@@ -77,6 +79,7 @@
     <Compile Include="Assets\Scipt\JsonReader.cs" />
     <Compile Include="Assets\Scipt\JsonWriter.cs" />
     <Compile Include="Assets\Scipt\ModelCollector.cs" />
+    <Compile Include="Assets\Scipt\ModelCollector1.cs" />
     <Compile Include="Assets\Scipt\Movment.cs" />
     <Compile Include="Assets\Scipt\NPCBehaviour.cs" />
     <Compile Include="Assets\Scipt\NPCBehaviour2.cs" />

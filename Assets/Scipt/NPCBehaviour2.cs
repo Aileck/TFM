@@ -30,24 +30,36 @@ public class NPCBehaviour2 : MonoBehaviour
     string myFireDestination;
     GameObject[] myBeforeFireDestination;
     int currentDestination = 0;
-    float distanceThreshold = 0.3f; // Distance threshold, used to judge whether to reach the target point
+    float distanceThreshold = 2f; // Distance threshold, used to judge whether to reach the target point
 
     AIDestinationSetter pathfinding;
     RichAI ai;
+    //AIPath ai;
 
     //Animation controller
+    float reactionTimeToRun = 0;
     int myRunStyle = 0;
     Animator anim;
+
+    //Animation controller
+    //For patrol
+        //Timer
+        float lookAtArguingTime = 3f;
+        
 
     void Start()
     {
         pathfinding = this.GetComponent<AIDestinationSetter>();
         anim = this.GetComponent<Animator>();
         ai = this.GetComponent<RichAI>();
+        //ai = this.GetComponent<AIPath>();
+        //ai.maxSpeed = 0.8f;
+        ai.maxSpeed = 0.8f;
 
         myRunStyle = Random.Range(0, 4);
-        //anim.SetInteger("run_style", -1);
         anim.SetInteger("run_style", myRunStyle);
+
+        anim.SetFloat("reaction_time_to_run", reactionTimeToRun);
 
         if (myPos == GenericModel.POSITION.SIT) {
             anim.SetTrigger("sit");
@@ -88,7 +100,11 @@ public class NPCBehaviour2 : MonoBehaviour
             case GenericModel.ROL.LISTEN:
                 anim.SetBool("listen", true);
                 break;
+            case GenericModel.ROL.TELEPHONE:
+                anim.SetBool("telephone", true);
+                break;
             case GenericModel.ROL.KNOCK:
+                ai.canMove = false;
                 anim.SetBool("knock", true);
                 break;
             case GenericModel.ROL.COFEE:
@@ -102,14 +118,31 @@ public class NPCBehaviour2 : MonoBehaviour
                 break;
             case GenericModel.ROL.PATROL:
                 anim.SetBool("patrol", true);
+                ai.maxSpeed = 0.8f;
+                break;
+
+            case GenericModel.ROL.REPAIR:
+                ai.canMove = false;
+                anim.SetBool("repair", true);
+                break;
+
+            case GenericModel.ROL.FAX:
+                ai.canMove = false;
+                anim.SetBool("fax", true);
                 break;
         }
+
+
+
+        
+
 
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        
         if (!LevelManager.fire && myState == State.BEFORE)
         {
             FaceExpressionControl();
@@ -127,11 +160,15 @@ public class NPCBehaviour2 : MonoBehaviour
 
             //Face expression
             FaceExpressionControl();
+  
 
         }
 
         if (LevelManager.fire && myState == State.PREPARING)
         {
+            //Stop all movement
+            ai.canMove = false;
+
             AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
             if (stateInfo.IsName("Shock sit") && stateInfo.normalizedTime >= 0.25f){
 
@@ -148,6 +185,7 @@ public class NPCBehaviour2 : MonoBehaviour
             }
             if ((stateInfo.IsName("Shock stand") || stateInfo.IsName("Shock sit")) && stateInfo.normalizedTime >= 0.80f)
             {
+
                 //Debug.Log("Pre run animation has finished.");
                 //anim.SetInteger("run_style", myRunStyle);
 
@@ -160,12 +198,16 @@ public class NPCBehaviour2 : MonoBehaviour
 
         if (LevelManager.fire && myState == State.ESCAPING) {
             //Debug.Log("My model " + (int)myModel  + " " + ai.velocity.magnitude);
-            anim.SetFloat("Speed", ai.velocity.magnitude);
-            anim.applyRootMotion = true;
+            ai.canMove = true;
+            //anim.SetFloat("Speed", ai.velocity.magnitude);
+            //anim.applyRootMotion = true;
             //SmoothMovement();
         }
     }
-
+    public void SetModel(GenericModel.MODEL model)
+    {
+        myModel = model;
+    }
     public void SetRol(GenericModel.ROL rol) {
         myRol = rol;
     }
@@ -187,22 +229,54 @@ public class NPCBehaviour2 : MonoBehaviour
         return myModel;
     }
 
+    public void setReactionTimeToRun(float time)
+    {
+        reactionTimeToRun = time;
+    }
+
     void MovmentControl() {
 
-        pathfinding.target = myBeforeFireDestination[currentDestination].transform;
-        float distance = Vector3.Distance(transform.position, pathfinding.target.position);
-        Debug.Log(distance);
-        //On path complete
-        if (distance < distanceThreshold) {
-            Debug.Log("Moc");
-            currentDestination++;
-            if (currentDestination >= myBeforeFireDestination.Length)
+        if (myBeforeFireDestination.Length > 0) {
+            pathfinding.target = myBeforeFireDestination[currentDestination].transform;
+            float distance = Vector3.Distance(transform.position, pathfinding.target.position);
+            Debug.Log(distance);
+            //On path complete
+            if (distance < distanceThreshold)
             {
-                currentDestination = 0;
+                //Special case
+                if (myRol == GenericModel.ROL.REPAIR || myRol == GenericModel.ROL.FAX)
+                {
+                    Debug.Log(myModel + " Reached");
+                    PauseMovement();
+                }
+
+                //Redo 
+                currentDestination++;
+                if (currentDestination >= myBeforeFireDestination.Length)
+                {
+                    currentDestination = 0;
+
+                }
             }
         }
 
+
     }
+
+
+
+    public void NextMovement()
+    {
+        ai.canMove = true;
+        anim.SetBool("ready_for_next_animation", true);
+    }
+
+    public void PauseMovement()
+    {
+        ai.canMove = false;
+        anim.SetBool("ready_for_next_animation", false);
+    }
+
 
 
     void FaceExpressionControl()
@@ -245,5 +319,7 @@ public class NPCBehaviour2 : MonoBehaviour
             }
         }
     }
+
+
 
 }
