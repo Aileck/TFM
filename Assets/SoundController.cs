@@ -65,5 +65,7 @@ public class SoundController : MonoBehaviour
 
             audioS.PlayOneShot(stepsTechnical[r]);
         }
+
+        npc.Footstep();
     }
 }

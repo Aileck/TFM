@@ -30,7 +30,7 @@ public class NPCBehaviour2 : MonoBehaviour
     string myFireDestination;
     GameObject[] myBeforeFireDestination;
     int currentDestination = 0;
-    float distanceThreshold = 2f; // Distance threshold, used to judge whether to reach the target point
+    public float distanceThreshold = 2f; // Distance threshold, used to judge whether to reach the target point
 
     AIDestinationSetter pathfinding;
     RichAI ai;
@@ -40,20 +40,18 @@ public class NPCBehaviour2 : MonoBehaviour
     float reactionTimeToRun = 0;
     int myRunStyle = 0;
     Animator anim;
+    bool footstepping = false;
+    public float footstepCounter = 0.02f;
+    float currentFootstepCounter = 0f;
 
-    //Animation controller
-    //For patrol
-        //Timer
-        float lookAtArguingTime = 3f;
-        
+
+
 
     void Start()
     {
         pathfinding = this.GetComponent<AIDestinationSetter>();
         anim = this.GetComponent<Animator>();
         ai = this.GetComponent<RichAI>();
-        //ai = this.GetComponent<AIPath>();
-        //ai.maxSpeed = 0.8f;
         ai.maxSpeed = 0.8f;
 
         myRunStyle = Random.Range(0, 4);
@@ -142,7 +140,7 @@ public class NPCBehaviour2 : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        //1.Befotr fire, do its routine
         if (!LevelManager.fire && myState == State.BEFORE)
         {
             FaceExpressionControl();
@@ -150,12 +148,17 @@ public class NPCBehaviour2 : MonoBehaviour
                 MovmentControl();
             }
 
+            //Determine if foot step
+            if (footstepping) {
+                FootStepControl();
+            }
+
         }
+
+        //2. Prepare to be shocked
         if (LevelManager.fire && myState == State.BEFORE)
         {
             anim.SetTrigger("fire");
-            AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-
             myState = State.PREPARING;
 
             //Face expression
@@ -164,6 +167,7 @@ public class NPCBehaviour2 : MonoBehaviour
 
         }
 
+        //3. Be shock
         if (LevelManager.fire && myState == State.PREPARING)
         {
             //Stop all movement
@@ -183,19 +187,25 @@ public class NPCBehaviour2 : MonoBehaviour
 
 
             }
-            if ((stateInfo.IsName("Shock stand") || stateInfo.IsName("Shock sit")) && stateInfo.normalizedTime >= 0.80f)
+
+
+            if ((   (stateInfo.IsName("Shock stand") && stateInfo.normalizedTime >= 0.80f) || 
+                    stateInfo.IsName("Shock sit 2")) && stateInfo.normalizedTime >= 0.50f)
             {
 
-                //Debug.Log("Pre run animation has finished.");
-                //anim.SetInteger("run_style", myRunStyle);
+                reactionTimeToRun -= Time.deltaTime;
+                anim.SetFloat("reaction_time_to_run", reactionTimeToRun);
 
-                pathfinding.target = GameObject.FindGameObjectWithTag(myFireDestination).transform;
-
-                this.myState = State.ESCAPING;
+                if (reactionTimeToRun <= 0) {
+                    pathfinding.target = GameObject.FindGameObjectWithTag(myFireDestination).transform;
+                    this.myState = State.ESCAPING;
+                }     
             }
 
         }
 
+
+        //4. Start to run
         if (LevelManager.fire && myState == State.ESCAPING) {
             //Debug.Log("My model " + (int)myModel  + " " + ai.velocity.magnitude);
             ai.canMove = true;
@@ -277,8 +287,22 @@ public class NPCBehaviour2 : MonoBehaviour
         anim.SetBool("ready_for_next_animation", false);
     }
 
+    public void Footstep()
+    {
+        footstepping = true;
+        ai.canMove = false;
+    }
 
 
+    void FootStepControl() {
+        currentFootstepCounter += Time.deltaTime;
+        if (currentFootstepCounter >= footstepCounter) {
+            currentFootstepCounter = 0;
+
+            footstepping = false;
+            ai.canMove = true;
+        }
+    }
     void FaceExpressionControl()
     {
         //Talk

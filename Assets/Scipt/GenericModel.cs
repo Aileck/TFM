@@ -71,10 +71,10 @@ public class GenericModel : MonoBehaviour
     public enum REACTION_TIME_TO_RUN
     {
         //Unit = mili second
-        SLOWEST = 1000,  
-        Slow = 800,      
-        Moderate = 600,  
-        Fast = 400,      
+        SLOWEST = 2500,  
+        Slow = 2000,      
+        Moderate = 1500,  
+        Fast = 1000,      
         Fastest = 200    
     }
 

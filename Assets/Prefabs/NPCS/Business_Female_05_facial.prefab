@@ -2102,6 +2102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af238153ab85667489cea6bca907e82c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceThreshold: 2
+  footstepCounter: 0.02
 --- !u!143 &-1072861554866068225
 CharacterController:
   m_ObjectHideFlags: 0
@@ -2111,7 +2113,7 @@ CharacterController:
   m_GameObject: {fileID: 6922722611775091895}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
