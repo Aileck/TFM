@@ -32,9 +32,10 @@ public class NPCBehaviour2 : MonoBehaviour
     int currentDestination = 0;
     public float distanceThreshold = 2f; // Distance threshold, used to judge whether to reach the target point
 
+    //Path fingding;
     AIDestinationSetter pathfinding;
     RichAI ai;
-    //AIPath ai;
+    float patrolSpeed = 1;
 
     //Animation controller
     float reactionTimeToRun = 0;
@@ -52,7 +53,7 @@ public class NPCBehaviour2 : MonoBehaviour
         pathfinding = this.GetComponent<AIDestinationSetter>();
         anim = this.GetComponent<Animator>();
         ai = this.GetComponent<RichAI>();
-        ai.maxSpeed = 0.8f;
+        ai.maxSpeed = patrolSpeed;
 
         myRunStyle = Random.Range(0, 4);
         anim.SetInteger("run_style", myRunStyle);
@@ -116,7 +117,6 @@ public class NPCBehaviour2 : MonoBehaviour
                 break;
             case GenericModel.ROL.PATROL:
                 anim.SetBool("patrol", true);
-                ai.maxSpeed = 0.8f;
                 break;
 
             case GenericModel.ROL.REPAIR:
@@ -291,6 +291,7 @@ public class NPCBehaviour2 : MonoBehaviour
     {
         footstepping = true;
         ai.canMove = false;
+        //anim.speed = 0;
     }
 
 
@@ -301,6 +302,7 @@ public class NPCBehaviour2 : MonoBehaviour
 
             footstepping = false;
             ai.canMove = true;
+            //anim.speed = 0.8f;
         }
     }
     void FaceExpressionControl()
