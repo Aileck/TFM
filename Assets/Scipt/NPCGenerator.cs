@@ -33,7 +33,6 @@ public class NPCGenerator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        //Debug.Log("Pushed"+pushed);
         if(LevelManager.fire)
         {
             this.gameObject.layer = 0;

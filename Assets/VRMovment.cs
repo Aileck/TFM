@@ -24,7 +24,6 @@ public class VRMovment : MonoBehaviour
         Vector2 touchpadValue = touchpadAction.GetAxis(SteamVR_Input_Sources.Any);
 
         if (touchpadValue != Vector2.zero) {
-            print(touchpadValue);
             Vector3 cameraPosition = vrCamera.position;
 
             // Obtenemos el vector de entrada del touchpad del controlador derecho
@@ -33,11 +32,30 @@ public class VRMovment : MonoBehaviour
             touchpadValue *= trackpadSensitivity;
 
             // Movemos la cámara VR en la dirección de la entrada del touchpad
-            cameraPosition += vrCamera.transform.forward * touchpadValue.y * movementSpeed;
-            cameraPosition += vrCamera.transform.right * touchpadValue.x * movementSpeed;
+            //cameraPosition += vrCamera.transform.forward * touchpadValue.y * movementSpeed;
+            //cameraPosition += vrCamera.transform.right * touchpadValue.x * movementSpeed;
 
-            // Establecemos la nueva posición de la cámara VR
-            vrCamera.position = cameraPosition;
+            //// Establecemos la nueva posición de la cámara VR
+            //vrCamera.position = cameraPosition;
+
+            Vector3 forceDirection = vrCamera.transform.forward * touchpadValue.y + vrCamera.transform.right * touchpadValue.x;
+            forceDirection.Normalize();
+
+            Debug.Log(forceDirection);
+
+            // Aplicamos la fuerza en la dirección calculada
+            this.GetComponent<Rigidbody>().AddForce(forceDirection * movementSpeed);
+
+            //this.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+
+
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<ChangeScene>() != null) {
+            other.GetComponent<ChangeScene>().SwitchScene();
         }
     }
 }

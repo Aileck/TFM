@@ -38,7 +38,6 @@ public class SoundController : MonoBehaviour
             myModel == GenericModel.MODEL.FEMALE_4 || myModel == GenericModel.MODEL.FEMALE_5 || myModel == GenericModel.MODEL.FEMALE_6
             || myModel == GenericModel.MODEL.FEMALE_7 ) {
             int r = Random.Range(0, stepsBusinessFemale.Length - 1);
-            Debug.Log(myModel +" nOW PLAYING");
             audioS.PlayOneShot(stepsBusinessFemale[r]);
         
         }

@@ -207,11 +207,8 @@ public class NPCBehaviour2 : MonoBehaviour
 
         //4. Start to run
         if (LevelManager.fire && myState == State.ESCAPING) {
-            //Debug.Log("My model " + (int)myModel  + " " + ai.velocity.magnitude);
             ai.canMove = true;
-            //anim.SetFloat("Speed", ai.velocity.magnitude);
-            //anim.applyRootMotion = true;
-            //SmoothMovement();
+
         }
     }
     public void SetModel(GenericModel.MODEL model)
@@ -249,14 +246,12 @@ public class NPCBehaviour2 : MonoBehaviour
         if (myBeforeFireDestination.Length > 0) {
             pathfinding.target = myBeforeFireDestination[currentDestination].transform;
             float distance = Vector3.Distance(transform.position, pathfinding.target.position);
-            Debug.Log(distance);
             //On path complete
             if (distance < distanceThreshold)
             {
                 //Special case
                 if (myRol == GenericModel.ROL.REPAIR || myRol == GenericModel.ROL.FAX)
                 {
-                    Debug.Log(myModel + " Reached");
                     PauseMovement();
                 }
 
