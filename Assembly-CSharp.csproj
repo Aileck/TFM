@@ -68,6 +68,7 @@
     <Compile Include="Assets\External\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\ElevatorManager.cs" />
+    <Compile Include="Assets\GazeEssential.cs" />
     <Compile Include="Assets\MusicController.cs" />
     <Compile Include="Assets\OfficeSceneManager.cs" />
     <Compile Include="Assets\PlayerController.cs" />

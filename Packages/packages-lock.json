@@ -107,7 +107,7 @@
       "url": "https://packages.unity.com"
     },
     "com.valvesoftware.unity.openvr": {
-      "version": "file:C:/Users/crv/Downloads/com.valvesoftware.unity.openvr-1.1.5.tgz",
+      "version": "file:../Assets/SteamVR/OpenVRUnityXRPackage/Editor/com.valvesoftware.unity.openvr-1.1.4.tgz",
       "depth": 0,
       "source": "local-tarball",
       "dependencies": {

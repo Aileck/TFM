@@ -6,7 +6,7 @@ using Valve.VR;
 public class VRMovment : MonoBehaviour
 {
    
-    // Configuramos los objetos y las acciones que vamos a utilizar
+    // Movment
     public Transform vrCamera;
  
     public SteamVR_Action_Vector2 touchpadAction;
@@ -14,16 +14,29 @@ public class VRMovment : MonoBehaviour
     public float movementSpeed = 1.0f;
     public float trackpadSensitivity = 1.0f;
 
+    public ForceMode movmentMode;
+
+    //Rotation
+    //private SteamVR_TrackedObject trackedObj;
+    //private SteamVR_Controller.Device device;
+
     private void Start()
     {
     }
     // Actualizamos el script en cada fotograma
     void Update()
     {
+        Movment();
+        Rotation();
+
+    }
+
+    private void Movment() {
         // Comprobamos si el touchpad derecho ha sido pulsado
         Vector2 touchpadValue = touchpadAction.GetAxis(SteamVR_Input_Sources.Any);
 
-        if (touchpadValue != Vector2.zero) {
+        if (touchpadValue != Vector2.zero)
+        {
             Vector3 cameraPosition = vrCamera.position;
 
             // Obtenemos el vector de entrada del touchpad del controlador derecho
@@ -41,15 +54,20 @@ public class VRMovment : MonoBehaviour
             Vector3 forceDirection = vrCamera.transform.forward * touchpadValue.y + vrCamera.transform.right * touchpadValue.x;
             forceDirection.Normalize();
 
-            Debug.Log(forceDirection);
+            //Debug.Log(forceDirection);
 
             // Aplicamos la fuerza en la dirección calculada
-            this.GetComponent<Rigidbody>().AddForce(forceDirection * movementSpeed);
+            this.GetComponent<Rigidbody>().AddForce(forceDirection * movementSpeed, movmentMode);
 
             //this.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
 
         }
+    }
+
+
+    private void Rotation() {
+
     }
 
     private void OnTriggerEnter(Collider other)

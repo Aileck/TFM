@@ -17,8 +17,14 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Scene1");
+        if (other.tag == "Office1")
+        {
+            Debug.Log("Scene 1");
+        }
+        else {
+            Debug.Log("Scene2");
+        }
     }
 }

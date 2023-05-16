@@ -91,7 +91,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
+  serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: c2ae0d4ee8e325f41b50c1551395103d, type: 3}
@@ -106,5 +106,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.6999998, y: 3, z: 0.79999995}
+  m_Size: {x: 1.6999998, y: 1, z: 0.79999995}
   m_Center: {x: -0.000000029802322, y: 0.37375033, z: -0.000000074505806}

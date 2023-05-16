@@ -12,11 +12,14 @@ public class UserBehaviorRegister : MonoBehaviour
 
     public JsonWriter json;
 
+    public bool saved = false;
+
 
     void Start()
     {
         //if (setup = )
         //user = GameObject.FindGameObjectWithTag("MainCamera");
+        //StartCoroutine(registerPositionAndRotation(sampleTime));
     }
 
 
@@ -24,13 +27,22 @@ public class UserBehaviorRegister : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        StartCoroutine(registerPositionAndRotation(sampleTime));
+        if (LevelManager.end && !saved)
+        {
+            Debug.Log("Emd");
+            json.GenerateJSON();
+            saved = true;
+            //Destroy(this);
+        }
 
     }
 
     IEnumerator registerPositionAndRotation(float time)
     {
-        while (true && LevelManager.end != false)
+
+        Debug.Log("Go ahead " + LevelManager.end);
+        while (!LevelManager.end)
         {
             yield return new WaitForSeconds(time);
             json.setPositionRotation(user.transform);

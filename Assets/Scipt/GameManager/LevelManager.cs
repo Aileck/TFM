@@ -22,6 +22,8 @@ public class LevelManager : MonoBehaviour
     public Text fireText;
     public Text countDownText;
 
+    public bool playerInOffice1;
+
 
 
 
@@ -62,6 +64,18 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public static bool inoffice1
+    {
+        get
+        {
+            return instance.playerInOffice1;
+        }
+        set
+        {
+            instance.playerInOffice1 = value;
+        }
+    }
+
     public static bool fire
     {
         get
@@ -82,7 +96,7 @@ public class LevelManager : MonoBehaviour
         }
         set
         {
-            instance.onFire = value;
+            instance.endgame = value;
         }
     }
 
