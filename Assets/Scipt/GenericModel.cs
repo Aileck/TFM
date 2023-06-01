@@ -160,5 +160,8 @@ public class GenericModel : MonoBehaviour
         itsReactionTime = reaction;
     }
 
+    public void SetDestination(DESTINATION destin) {
+        itsDestination = destin;
+    }
 
 }

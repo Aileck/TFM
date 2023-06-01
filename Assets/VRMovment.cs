@@ -69,7 +69,7 @@ public class VRMovment : MonoBehaviour
 
 
     private void Rotation() {
-
+        //Debug.Log(SteamVR.);
     }
 
     private void KeyboardMovment()

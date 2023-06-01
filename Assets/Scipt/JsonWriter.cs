@@ -64,19 +64,37 @@ public class JsonWriter : MonoBehaviour
     }
 
     public void setPositionRotation(Transform transform) {
-        Debug.Log(Mathf.Round(transform.position.x * 10) / 10);
+        //Debug.Log(Mathf.Round(transform.position.x * 10) / 10);
         PositionRotation register = new PositionRotation
         {
-            posX = Mathf.Round(transform.position.x * 10) / 10,
-            posY = Mathf.Round(transform.position.y * 10) / 10,
-            posZ = Mathf.Round(transform.position.z * 10) / 10,
+            //posX = Mathf.Round(transform.position.x * 10) / 10,
+            //posY = Mathf.Round(transform.position.y * 10) / 10,
+            //posZ = Mathf.Round(transform.position.z * 10) / 10,
 
-            rotX = Mathf.Round(transform.rotation.x * 10) / 10,
-            rotY = Mathf.Round(transform.rotation.y * 10) / 10,
-            rotZ = Mathf.Round(transform.rotation.z * 10) / 10,
+            //rotX = Mathf.Round(transform.rotation.x * 10) / 10,
+            //rotY = Mathf.Round(transform.rotation.y * 10) / 10,
+            //rotZ = Mathf.Round(transform.rotation.z * 10) / 10,
 
         };
         
+        data.prs.Add(register);
+    }
+
+    public void setPositionRotation2(float px, float py, float pz, float rx, float ry, float rz)
+    {
+        //Debug.Log(Mathf.Round(transform.position.x * 10) / 10);
+        PositionRotation register = new PositionRotation
+        {
+            posX = ((Mathf.Round(px) * 10) / 10),
+            posY = ((Mathf.Round(py) * 10) / 10),
+            posZ = ((Mathf.Round(pz) * 10) / 10),
+                                     
+            rotX = ((Mathf.Round(rx) * 10) / 10),
+            rotY = ((Mathf.Round(ry) * 10) / 10),
+            rotZ = ((Mathf.Round(rz) * 10) / 10),
+
+    };
+
         data.prs.Add(register);
     }
 

@@ -19,9 +19,9 @@ public class UserBehaviorRegister : MonoBehaviour
     {
         //if (setup = )
         //user = GameObject.FindGameObjectWithTag("MainCamera");
-        //StartCoroutine(registerPositionAndRotation(sampleTime));
-    }
 
+        json.setSampleRate(sampleTime);
+    }
 
 
     // Update is called once per frame
@@ -45,8 +45,16 @@ public class UserBehaviorRegister : MonoBehaviour
         while (!LevelManager.end)
         {
             yield return new WaitForSeconds(time);
-            json.setPositionRotation(user.transform);
-         
+
+            float posX = user.transform.position.x;
+            float posY = user.transform.position.y;
+            float posZ = user.transform.position.z;                                                 
+            float rotX = user.transform.rotation.x;
+            float rotY = user.transform.rotation.y;
+            float rotZ = user.transform.rotation.z;
+
+            json.setPositionRotation2(posX, posY, posZ, rotX, rotY, rotZ);
+
         }
     }
 

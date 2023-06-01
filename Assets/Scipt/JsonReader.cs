@@ -44,6 +44,8 @@ public class JsonReader : MonoBehaviour
         string filePath = Path.Combine(Application.persistentDataPath, FileName);
         string jsonString = File.ReadAllText(filePath);
 
+        Debug.Log(jsonString);
+
         MyData data = JsonUtility.FromJson<MyData>(jsonString);
 
         this.data = data;
@@ -57,7 +59,6 @@ public class JsonReader : MonoBehaviour
 
     IEnumerator replay(float time)
     {
-        Debug.Log(data.prs.Capacity);
         for(int i = 0; i < data.prs.Capacity; i++)
         {
             yield return new WaitForSeconds(time);
@@ -68,6 +69,8 @@ public class JsonReader : MonoBehaviour
             float rotX = data.prs[i].rotX;
             float rotY = data.prs[i].rotY;
             float rotZ = data.prs[i].rotZ;
+
+            Debug.Log(i);
             camera.transform.position = new Vector3(posX,posY,posZ);
             camera.transform.rotation = Quaternion.Euler(rotX,rotY,rotZ);
 

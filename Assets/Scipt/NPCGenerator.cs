@@ -10,11 +10,10 @@ public class NPCGenerator : MonoBehaviour
     public GenericModel.POSITION itsPosition = GenericModel.POSITION.SIT;
     public GenericModel.REACTION_TIME_TO_RUN itsReactopmTime;
     public GameObject genericModel;
+    public GenericModel.DESTINATION itsDestination;
     public GameObject[] itsBeforeFireDestination;
+    GameObject myNPC;
 
-    public GameObject myNPC;
-
-    public float m_Thrust;
     bool pushed;
     bool ready;
 
@@ -24,6 +23,7 @@ public class NPCGenerator : MonoBehaviour
         thisNPC.GetComponent<GenericModel>().SetModel(itsModel);
         thisNPC.GetComponent<GenericModel>().SetRol(itsRol, itsPosition);
         thisNPC.GetComponent<GenericModel>().SetBeforeDestination(itsBeforeFireDestination);
+        thisNPC.GetComponent<GenericModel>().SetDestination(itsDestination);
         thisNPC.GetComponent<GenericModel>().SetReactionTime(itsReactopmTime) ;
 
         myNPC = thisNPC;
@@ -39,28 +39,17 @@ public class NPCGenerator : MonoBehaviour
             transform.GetChild(0).gameObject.layer = 0;
             transform.GetChild(1).gameObject.layer = 0;
         }
+
+        //Push chair when sounds alar
         if (itsPosition != GenericModel.POSITION.MOVEMENT && (LevelManager.fire && pushed == false && ready && this.GetComponent<Rigidbody>() != null))
         {
-            //this.transform.position-= Vector3.left * Time.deltaTime;
-            //this.transform.GetChild(0).transform.position -= Vector3.left * Time.deltaTime;
-            //this.transform.GetChild(1).transform.position -= Vector3.left * Time.deltaTime;
-
-
-            //transform.Translate(Vector3.back);
-
 
             Vector3 backwardForce = new Vector3(0, 0, -1);
 
             this.GetComponent<Rigidbody>().AddForce(backwardForce, ForceMode.Impulse);
             pushed = true;
 
-
-
         }
-
-        //this.transform.position -= new Vector3(-0.5f,0,0);
-        //amountGoBack -= Time.deltaTime;
-
 
     }
 
