@@ -44,8 +44,7 @@ public class NPCBehaviour2 : MonoBehaviour
     bool footstepping = false;
     public float footstepCounter = 0.02f;
     float currentFootstepCounter = 0f;
-
-
+    float moveSpeed = 2;
 
 
     void Start()
@@ -132,8 +131,6 @@ public class NPCBehaviour2 : MonoBehaviour
 
 
 
-        
-
 
     }
 
@@ -209,6 +206,8 @@ public class NPCBehaviour2 : MonoBehaviour
         if (LevelManager.fire && myState == State.ESCAPING) {
             ai.canMove = true;
 
+            ai.maxSpeed = moveSpeed; 
+
             if (ai.reachedDestination || ai.remainingDistance <= 0.2f) {
                 Destroy(this.gameObject);
             }
@@ -242,6 +241,10 @@ public class NPCBehaviour2 : MonoBehaviour
     public void setReactionTimeToRun(float time)
     {
         reactionTimeToRun = time;
+    }
+
+    public void setMoveSpeed(float speed) {
+        moveSpeed = speed;
     }
 
     void MovmentControl() {

@@ -8,7 +8,8 @@ public class NPCGenerator : MonoBehaviour
     public GenericModel.MODEL itsModel;
     public GenericModel.ROL itsRol;
     public GenericModel.POSITION itsPosition = GenericModel.POSITION.SIT;
-    public GenericModel.REACTION_TIME_TO_RUN itsReactopmTime;
+    public GenericModel.MOVE_VELOCITY itsVelocity;
+    public GenericModel.REACTION_TIME_TO_RUN itsReactionTime;
     public GameObject genericModel;
     public GenericModel.DESTINATION itsDestination;
     public GameObject[] itsBeforeFireDestination;
@@ -24,7 +25,8 @@ public class NPCGenerator : MonoBehaviour
         thisNPC.GetComponent<GenericModel>().SetRol(itsRol, itsPosition);
         thisNPC.GetComponent<GenericModel>().SetBeforeDestination(itsBeforeFireDestination);
         thisNPC.GetComponent<GenericModel>().SetDestination(itsDestination);
-        thisNPC.GetComponent<GenericModel>().SetReactionTime(itsReactopmTime) ;
+        thisNPC.GetComponent<GenericModel>().SetReactionTime(itsReactionTime);
+        thisNPC.GetComponent<GenericModel>().SetVelocity(itsVelocity);
 
         myNPC = thisNPC;
         pushed = false;

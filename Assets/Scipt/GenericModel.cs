@@ -78,9 +78,13 @@ public class GenericModel : MonoBehaviour
         Fastest = 200    
     }
 
-    private ROL[] standRols = { ROL.ANGRY, ROL.EXITED, ROL.TYPE, ROL.LEAN, ROL.PRESENT, ROL.LISTEN, ROL.KNOCK, ROL.COFEE, ROL.ARGUING, ROL.YELLING };
-    private ROL[] sitRols = { ROL.LAUGHT, ROL.TALK, ROL.NO_TALK, ROL.TALK_LESS };
-    private ROL[] movementRols = { ROL.PATROL };
+    public enum MOVE_VELOCITY
+    {
+        Slow = 8,
+        Moderate = 10,
+        Fast = 12,
+        Fastest = 13
+    }
 
     public enum DESTINATION
     {
@@ -92,7 +96,9 @@ public class GenericModel : MonoBehaviour
     [SerializeField]
     GenericModel.MODEL itsModel;
     [SerializeField]
-    GenericModel.ROL itsRol;    
+    GenericModel.ROL itsRol;
+    [SerializeField]
+    GenericModel.MOVE_VELOCITY itsVelocity;
     [SerializeField]
     GenericModel.REACTION_TIME_TO_RUN itsReactionTime;
     [SerializeField]
@@ -131,6 +137,7 @@ public class GenericModel : MonoBehaviour
         thisNPC.GetComponent<NPCBehaviour2>().SetDestination(doorTags[(int)itsDestination]);
         thisNPC.GetComponent<NPCBehaviour2>().SetBeforeDestination(itsBeforeFireDestination);
         thisNPC.GetComponent<NPCBehaviour2>().setReactionTimeToRun((float)((int)itsReactionTime)/1000);
+        thisNPC.GetComponent<NPCBehaviour2>().setMoveSpeed((float)((int)itsVelocity) / 10);
 
 
         //thisNPC.transform.SetParent(this.gameObject.transform);
@@ -162,6 +169,11 @@ public class GenericModel : MonoBehaviour
 
     public void SetDestination(DESTINATION destin) {
         itsDestination = destin;
+    }
+
+    public void SetVelocity(MOVE_VELOCITY vel)
+    {
+        itsVelocity = vel;
     }
 
 }
