@@ -208,7 +208,8 @@ public class NPCBehaviour2 : MonoBehaviour
         //4. Start to run
         if (LevelManager.fire && myState == State.ESCAPING) {
             ai.canMove = true;
-            if (ai.reachedDestination) {
+
+            if (ai.reachedDestination || ai.remainingDistance <= 0.2f) {
                 Destroy(this.gameObject);
             }
         }
