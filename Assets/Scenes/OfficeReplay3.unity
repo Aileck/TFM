@@ -32147,7 +32147,7 @@ PrefabInstance:
     - target: {fileID: 698050190857503281, guid: 7d8ed20250e65b042bf3216f17b117ea,
         type: 3}
       propertyPath: itsModel
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 698050190857503281, guid: 7d8ed20250e65b042bf3216f17b117ea,
         type: 3}
@@ -76962,7 +76962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6cc9411df21164ea281584f9f34f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FileName: 146193415
+  FileName: 146204141
   camera: {fileID: 1000013974824803}
 --- !u!1 &1036517531741619
 GameObject:

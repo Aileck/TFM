@@ -51,10 +51,11 @@ public class UserBehaviorRegister : MonoBehaviour
 
             float posX = user.transform.position.x;
             float posY = user.transform.position.y;
-            float posZ = user.transform.position.z;                                                 
-            float rotX = user.transform.rotation.x;
-            float rotY = user.transform.rotation.y;
-            float rotZ = user.transform.rotation.z;
+            float posZ = user.transform.position.z;   
+            
+            float rotX = user.transform.rotation.eulerAngles.x;
+            float rotY = user.transform.rotation.eulerAngles.y;
+            float rotZ = user.transform.rotation.eulerAngles.z;
 
             shotCounter++;
             Debug.Log(shotCounter);

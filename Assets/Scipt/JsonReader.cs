@@ -86,13 +86,13 @@ public class JsonReader : MonoBehaviour
             float rotZ = data.prs[counter].rotZ;
 
             Vector3 nextPosition = new Vector3(posX, posY, posZ);
-            Quaternion nextRotation = Quaternion.LookRotation(new Vector3(rotX, rotY, rotZ));
+            Quaternion nextRotation = Quaternion.Euler(rotX, rotY, rotZ);
 
             if (replayTime >= time)
             {
 
                 camera.transform.position = nextPosition;
-                camera.transform.rotation = Quaternion.Euler(rotX, rotY, rotZ);
+                camera.transform.rotation = nextRotation;
 
                 lastPosition = nextPosition;
                 lastRotation = nextRotation;
