@@ -12,7 +12,8 @@ public class NPCBehaviour2 : MonoBehaviour
     {
         BEFORE,
         PREPARING,
-        ESCAPING
+        GOTO_OFFICE2,
+        GOTO_OUT
     }
 
     State myState = State.BEFORE;
@@ -59,7 +60,8 @@ public class NPCBehaviour2 : MonoBehaviour
 
         anim.SetFloat("reaction_time_to_run", reactionTimeToRun);
 
-        if (myPos == GenericModel.POSITION.SIT) {
+        if (myPos == GenericModel.POSITION.SIT)
+        {
             anim.SetTrigger("sit");
         }
         if (myPos == GenericModel.POSITION.MOVEMENT)
@@ -141,12 +143,14 @@ public class NPCBehaviour2 : MonoBehaviour
         if (!LevelManager.fire && myState == State.BEFORE)
         {
             FaceExpressionControl();
-            if (myPos == GenericModel.POSITION.MOVEMENT) {
+            if (myPos == GenericModel.POSITION.MOVEMENT)
+            {
                 MovmentControl();
             }
 
             //Determine if foot step
-            if (footstepping) {
+            if (footstepping)
+            {
                 FootStepControl();
             }
 
@@ -160,7 +164,7 @@ public class NPCBehaviour2 : MonoBehaviour
 
             //Face expression
             FaceExpressionControl();
-  
+
 
         }
 
@@ -171,7 +175,8 @@ public class NPCBehaviour2 : MonoBehaviour
             ai.canMove = false;
 
             AnimatorStateInfo stateInfo = anim.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Shock sit") && stateInfo.normalizedTime >= 0.25f){
+            if (stateInfo.IsName("Shock sit") && stateInfo.normalizedTime >= 0.25f)
+            {
 
                 //Access to top parent (chair) that is ready
                 Transform topParent = transform;
@@ -179,36 +184,56 @@ public class NPCBehaviour2 : MonoBehaviour
                 {
                     topParent = topParent.parent;
                 }
-                if(topParent.GetComponent<NPCGenerator>() != null)
+                if (topParent.GetComponent<NPCGenerator>() != null)
                     topParent.gameObject.GetComponent<NPCGenerator>().SetReady();
 
 
             }
 
 
-            if ((   (stateInfo.IsName("Shock stand") && stateInfo.normalizedTime >= 0.80f) || 
+            if (((stateInfo.IsName("Shock stand") && stateInfo.normalizedTime >= 0.80f) ||
                     stateInfo.IsName("Shock sit 2")) && stateInfo.normalizedTime >= 0.50f)
             {
 
                 reactionTimeToRun -= Time.deltaTime;
                 anim.SetFloat("reaction_time_to_run", reactionTimeToRun);
 
-                if (reactionTimeToRun <= 0) {
-                    pathfinding.target = GameObject.FindGameObjectWithTag(myFireDestination).transform;
-                    this.myState = State.ESCAPING;
-                }     
+                if (reactionTimeToRun <= 0)
+                {
+                    //pathfinding.target = GameObject.FindGameObjectWithTag(myFireDestination).transform;
+                    pathfinding.target = GameObject.FindGameObjectWithTag("Checkpoint1").transform;
+                    this.myState = State.GOTO_OFFICE2;
+                }
             }
 
         }
 
 
-        //4. Start to run
-        if (LevelManager.fire && myState == State.ESCAPING) {
+        //4. Start to go office2
+        if (LevelManager.fire && myState == State.GOTO_OFFICE2)
+        {
             ai.canMove = true;
+
+            //ai.maxSpeed = moveSpeed; 
+            ai.maxSpeed = 1;
+
+            if ( ai.remainingDistance <= 1f)
+            {
+                this.myState = State.GOTO_OUT;
+                pathfinding.target = GameObject.FindGameObjectWithTag(myFireDestination).transform;
+
+            }
+        }
+
+        //4.Start to go out
+        if (LevelManager.fire && myState == State.GOTO_OUT)
+        {
 
             ai.maxSpeed = moveSpeed; 
 
-            if (ai.reachedDestination || ai.remainingDistance <= 0.2f) {
+            if (ai.remainingDistance <= 0.1f)
+            {
+
                 Destroy(this.gameObject);
             }
         }
@@ -217,7 +242,8 @@ public class NPCBehaviour2 : MonoBehaviour
     {
         myModel = model;
     }
-    public void SetRol(GenericModel.ROL rol) {
+    public void SetRol(GenericModel.ROL rol)
+    {
         myRol = rol;
     }
     public void SetPosition(GenericModel.POSITION pos)
@@ -225,7 +251,8 @@ public class NPCBehaviour2 : MonoBehaviour
         myPos = pos;
     }
 
-    public void SetDestination(string destination) {
+    public void SetDestination(string destination)
+    {
         myFireDestination = destination;
     }
 
@@ -234,7 +261,8 @@ public class NPCBehaviour2 : MonoBehaviour
         myBeforeFireDestination = destinations;
     }
 
-    public GenericModel.MODEL GetModel() {
+    public GenericModel.MODEL GetModel()
+    {
         return myModel;
     }
 
@@ -243,13 +271,16 @@ public class NPCBehaviour2 : MonoBehaviour
         reactionTimeToRun = time;
     }
 
-    public void setMoveSpeed(float speed) {
+    public void setMoveSpeed(float speed)
+    {
         moveSpeed = speed;
     }
 
-    void MovmentControl() {
+    void MovmentControl()
+    {
 
-        if (myBeforeFireDestination.Length > 0) {
+        if (myBeforeFireDestination.Length > 0)
+        {
             pathfinding.target = myBeforeFireDestination[currentDestination].transform;
             float distance = Vector3.Distance(transform.position, pathfinding.target.position);
             //On path complete
@@ -296,9 +327,11 @@ public class NPCBehaviour2 : MonoBehaviour
     }
 
 
-    void FootStepControl() {
+    void FootStepControl()
+    {
         currentFootstepCounter += Time.deltaTime;
-        if (currentFootstepCounter >= footstepCounter) {
+        if (currentFootstepCounter >= footstepCounter)
+        {
             currentFootstepCounter = 0;
 
             footstepping = false;
@@ -309,7 +342,7 @@ public class NPCBehaviour2 : MonoBehaviour
     void FaceExpressionControl()
     {
         //Talk
-        if(myRol == GenericModel.ROL.EXITED ||
+        if (myRol == GenericModel.ROL.EXITED ||
             myRol == GenericModel.ROL.ARGUING ||
             myRol == GenericModel.ROL.YELLING ||
             myRol == GenericModel.ROL.TALK ||
@@ -321,7 +354,8 @@ public class NPCBehaviour2 : MonoBehaviour
             Mesh mesh = skinnedMeshRenderer.sharedMesh;
             int mouthO = mesh.GetBlendShapeIndex("AA_VL_13_O");
             skinnedMeshRenderer.SetBlendShapeWeight(13, mouthBlendShape);
-            if(myRol == GenericModel.ROL.EXITED) {
+            if (myRol == GenericModel.ROL.EXITED)
+            {
                 skinnedMeshRenderer.SetBlendShapeWeight(25, mouthBlendShape);
 
             }
@@ -330,7 +364,7 @@ public class NPCBehaviour2 : MonoBehaviour
             {
                 mouthBlendShape = Mathf.Lerp(mouthBlendShape, 100, Time.deltaTime * 5F);
 
-                if(mouthBlendShape >= 90)
+                if (mouthBlendShape >= 90)
                 {
                     openmouth = false;
                 }

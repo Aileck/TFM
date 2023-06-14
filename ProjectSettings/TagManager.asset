@@ -9,6 +9,7 @@ TagManager:
   - Office1
   - Office2
   - Avatar
+  - Checkpoint1
   layers:
   - Default
   - TransparentFX

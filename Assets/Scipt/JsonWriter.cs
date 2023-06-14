@@ -28,6 +28,8 @@ public class JsonWriter : MonoBehaviour
     [System.Serializable]
     public class PositionRotation
     {
+        public float timeStamp;
+
         public float posX;
         public float posY;
         public float posZ;
@@ -80,11 +82,11 @@ public class JsonWriter : MonoBehaviour
         data.prs.Add(register);
     }
 
-    public void setPositionRotation2(float px, float py, float pz, float rx, float ry, float rz)
+    public void setPositionRotation2(float px, float py, float pz, float rx, float ry, float rz, float ts)
     {
-        //Debug.Log(Mathf.Round(transform.position.x * 10) / 10);
         PositionRotation register = new PositionRotation
         {
+            timeStamp = ts,
             posX = ((Mathf.Round(px) * 10) / 10),
             posY = ((Mathf.Round(py) * 10) / 10),
             posZ = ((Mathf.Round(pz) * 10) / 10),
@@ -93,7 +95,7 @@ public class JsonWriter : MonoBehaviour
             rotY = ((Mathf.Round(ry) * 10) / 10),
             rotZ = ((Mathf.Round(rz) * 10) / 10),
 
-    };
+        };
 
         data.prs.Add(register);
     }

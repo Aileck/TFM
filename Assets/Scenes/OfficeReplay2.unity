@@ -25171,7 +25171,8 @@ MonoBehaviour:
   itsModel: 2
   itsRol: 3
   itsPosition: 0
-  itsReactopmTime: 2500
+  itsVelocity: 0
+  itsReactionTime: 0
   genericModel: {fileID: 487337559828320038, guid: 7d8ed20250e65b042bf3216f17b117ea,
     type: 3}
   itsDestination: 1
@@ -46587,6 +46588,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460546c0c86ae284992c71c6d908d87e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsBGM: 0
+  IsSFX: 0
   stringArray:
   - office_atmosphere
   - office_fire_alarm
@@ -52476,7 +52479,8 @@ MonoBehaviour:
   itsModel: 3
   itsRol: 3
   itsPosition: 0
-  itsReactopmTime: 0
+  itsVelocity: 0
+  itsReactionTime: 0
   genericModel: {fileID: 487337559828320038, guid: 7d8ed20250e65b042bf3216f17b117ea,
     type: 3}
   itsDestination: 0
@@ -78513,7 +78517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c6cc9411df21164ea281584f9f34f60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FileName: 1621921.json
+  FileName: 146193415
   camera: {fileID: 1000013974824803}
 --- !u!1 &1036517531741619
 GameObject:

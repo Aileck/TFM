@@ -5,6 +5,7 @@ using UnityEngine;
 public class UserBehaviorRegister : MonoBehaviour
 {
     // Start is called before the first frame update
+    int shotCounter = 0;
     public float sampleTime = 0.5f;
     public GameObject user;
 
@@ -20,14 +21,15 @@ public class UserBehaviorRegister : MonoBehaviour
         //if (setup = )
         //user = GameObject.FindGameObjectWithTag("MainCamera");
 
-        json.setSampleRate(sampleTime);
+        //json.setSampleRate(sampleTime);
+        StartCoroutine(registerPositionAndRotation(sampleTime));
     }
 
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        StartCoroutine(registerPositionAndRotation(sampleTime));
+       
         if (LevelManager.end && !saved)
         {
             Debug.Log("Emd");
@@ -46,6 +48,7 @@ public class UserBehaviorRegister : MonoBehaviour
         {
             yield return new WaitForSeconds(time);
 
+
             float posX = user.transform.position.x;
             float posY = user.transform.position.y;
             float posZ = user.transform.position.z;                                                 
@@ -53,7 +56,9 @@ public class UserBehaviorRegister : MonoBehaviour
             float rotY = user.transform.rotation.y;
             float rotZ = user.transform.rotation.z;
 
-            json.setPositionRotation2(posX, posY, posZ, rotX, rotY, rotZ);
+            shotCounter++;
+            Debug.Log(shotCounter);
+            json.setPositionRotation2(posX, posY, posZ, rotX, rotY, rotZ, Time.time);
 
         }
     }
