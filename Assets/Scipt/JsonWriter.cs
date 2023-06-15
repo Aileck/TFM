@@ -28,11 +28,15 @@ public class JsonWriter : MonoBehaviour
         public float timeBeforeTimber;
         public float sampleRate;
 
+
+
+        //Other
+        public List<AvatarInfo> avatars;
+        public List<Sign> signs;
+        public List<Exit> exits;
+
         //User info
         public UserInfo user;
-
-        //Avatar
-        public List<AvatarInfo> avatars;
 
     }
 
@@ -41,29 +45,63 @@ public class JsonWriter : MonoBehaviour
     {
         //Experiment sumarry
         public string exit;
-        public float totaldutarion;
+        public float totalduration;
 
         //Route
         public float height;
         public List<PositionRotation> prs;
+
+        public UserInfo() {
+            prs = new List<PositionRotation>();
+        }
     }
 
+    [System.Serializable]
     public class AvatarInfo
     {
         public string id;
         public List<PositionRotation> prs;
+
+        public AvatarInfo(string id)
+        {
+            this.id = id;
+            this.prs = new List<PositionRotation>();
+        }
     }
 
+    [System.Serializable]
     public class Sign
     {
         public string id;
         public StaticPosition pos;
+
+        public Sign(string id, float posX, float posZ) {
+            this.id = id;
+            this.pos = new StaticPosition(posX, posZ);
+        }
     }
 
+    public class Exits
+    {
+        public List<Exit> exits;
+
+        public Exits()
+        {
+            exits = new List<Exit>();
+        }
+    }
+
+    [System.Serializable]
     public class Exit
     {
         public string id;
         public StaticPosition pos;
+
+        public Exit(string id, float posX, float posZ)
+        {
+            this.id = id;
+            this.pos = new StaticPosition(posX, posZ);
+        }
     }
 
     [System.Serializable]
@@ -84,10 +122,17 @@ public class JsonWriter : MonoBehaviour
     {
         public float posX;
         public float posZ;
+
+        public StaticPosition(float posX, float posZ) {
+            this.posX = posX;
+            this.posZ = posZ;
+        }
     }
 
     private MyData data;
-    private string filename; 
+    private string filename;
+
+    private bool generated;
 
     private void Start()
     {
@@ -96,12 +141,17 @@ public class JsonWriter : MonoBehaviour
         data.time = DateTime.Now;
         data.day = DateTime.Now.Day;
         data.month = DateTime.Now.Month;
+        data.year = DateTime.Now.Year;
         data.hour = DateTime.Now.Hour;
         data.minute = DateTime.Now.Minute;
         data.second = DateTime.Now.Second;
 
         data.user = new UserInfo();
-        data.prs = new List<PositionRotation>();
+
+        data.avatars = new List<AvatarInfo>();
+
+        data.signs = new List<Sign>();
+        data.exits = new List<Exit>();
 
     }
 
@@ -109,9 +159,40 @@ public class JsonWriter : MonoBehaviour
         data.id = id;
     }
 
+    public void setCondition(bool training, bool avatar) {
+        //Parameter
+        data.training = training;
+        data.avatar = avatar;
+ 
+        //public float sampleRate;
+    }
+
+    public void setGroup(string group) {
+        data.group = group;
+    }
+
+    public void setTimeBeforeTimber(int time) {
+        data.timeBeforeTimber = time;
+    }
+
     public void setSampleRate(float sample) {
         data.sampleRate = sample;
     }
+
+    public void createAvatar(string id) {
+        data.avatars.Add(new AvatarInfo(id));
+    }
+
+    public void createSign(string id, float posX, float posZ)
+    {
+        data.signs.Add(new Sign(id, posX, posZ));
+    }
+
+    public void createExit(string id, float posX, float posZ)
+    {
+        data.exits.Add(new Exit(id, posX, posZ));
+    }
+
 
     public void setPositionRotation2(float px, float py, float pz, float rx, float ry, float rz, float ts)
     {
@@ -119,7 +200,6 @@ public class JsonWriter : MonoBehaviour
         {
             timeStamp = ts,
             posX = ((Mathf.Round(px) * 10) / 10),
-            posY = ((Mathf.Round(py) * 10) / 10),
             posZ = ((Mathf.Round(pz) * 10) / 10),
                                      
             rotX = ((Mathf.Round(rx) * 10) / 10),
@@ -128,23 +208,26 @@ public class JsonWriter : MonoBehaviour
 
         };
 
-        data.prs.Add(register);
+        data.user.prs.Add(register);
     }
 
     public void GenerateJSON() {
+        if (!generated) {
+            string jsonString = JsonUtility.ToJson(data);
 
-        string jsonString = JsonUtility.ToJson(data);
+            string filePath = Path.Combine(Application.persistentDataPath,
+                data.day.ToString() + data.month.ToString() +
+                data.hour.ToString() + data.minute.ToString() + data.second.ToString() +
+                ".json");
+            File.WriteAllText(filePath, jsonString);
 
-        string filePath = Path.Combine(Application.persistentDataPath, 
-            data.day.ToString()  + data.month.ToString()  +
-            data.hour.ToString()  + data.minute.ToString() + data.second.ToString() +
-            ".json");
-        File.WriteAllText(filePath, jsonString);
+            Debug.Log("JSON file written to: " + filePath);
 
-        Debug.Log("JSON file written to: " + filePath);
+            TimeSpan timeDiff = DateTime.Now - data.time;
+            Debug.Log("Total recording time: " + (int)timeDiff.TotalSeconds);
 
-        TimeSpan timeDiff = DateTime.Now - data.time;
-        Debug.Log("Total recording time: " + (int)timeDiff.TotalSeconds);
-        Debug.Log("Points registered: " + data.prs.Capacity);
+            generated = true;
+
+        }
     }
 }

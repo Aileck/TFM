@@ -19,10 +19,15 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     int timeToFire = 5;
 
+    [SerializeField]
+    float samplerate = 0.5f;
+
     public Text fireText;
     public Text countDownText;
 
     public bool playerInOffice1;
+
+    public JsonWriter json;
 
 
 
@@ -42,6 +47,8 @@ public class LevelManager : MonoBehaviour
         }
 
         StartCoroutine(Countdown(timeToFire));
+        StartCoroutine(StartAfterSceneLoad());
+
     }
 
     private void Awake()
@@ -61,6 +68,11 @@ public class LevelManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             endgame = true;
+
+        }
+
+        if (endgame) {
+            json.GenerateJSON();
         }
     }
 
@@ -100,7 +112,50 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    IEnumerator Countdown( int time)
+    public static JsonWriter jsonUtility
+    {
+        get
+        {
+            return instance.json;
+        }
+
+    }
+
+    private IEnumerator StartAfterSceneLoad()
+    {
+        yield return new WaitForEndOfFrame();
+
+        //Set up json
+        //json.setID("");
+        //json.setCondition("true, false");
+        //json.setGroup("");
+        json.setTimeBeforeTimber(timeToFire);
+        json.setSampleRate(samplerate);
+
+        //Avatar
+        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Avatar")) {
+            Debug.Log("Le");
+            json.createAvatar(g.name);
+        }
+
+        //Sign
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Sign"))
+        {
+            json.createSign(g.name, g.transform.position.x, g.transform.position.z);
+        }
+
+        //Exit
+        GameObject e1 = GameObject.FindGameObjectWithTag("Door1");
+        json.createExit("1", e1.transform.position.x, e1.transform.position.z);
+
+        //Exit
+        GameObject e2 = GameObject.FindGameObjectWithTag("Door2");
+        json.createExit("2", e2.transform.position.x, e2.transform.position.z);
+
+    }
+
+
+        IEnumerator Countdown( int time)
     {
         while (time >= 0)
         {

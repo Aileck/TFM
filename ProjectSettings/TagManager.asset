@@ -10,6 +10,7 @@ TagManager:
   - Office2
   - Avatar
   - Checkpoint1
+  - Sign
   layers:
   - Default
   - TransparentFX

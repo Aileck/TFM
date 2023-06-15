@@ -5,6 +5,7 @@ using UnityEngine;
 public class NPCGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
+    public string ID;
     public GenericModel.MODEL itsModel;
     public GenericModel.ROL itsRol;
     public GenericModel.POSITION itsPosition = GenericModel.POSITION.SIT;
