@@ -6,23 +6,64 @@ using System;
 
 public class JsonWriter : MonoBehaviour
 {
-    // 创建一个包含要写入的数据的类
     [System.Serializable]
     public class MyData
     {
-        public string sdk;
+        public string id;
 
         public DateTime time;
+
+        //Time info
         public int day;
         public int month;
+        public int year;
         public int hour;
         public int minute;
         public int second;
-        
-        
+
+        //Parameter
+        public bool training;
+        public bool avatar;
+        public string group;
+        public float timeBeforeTimber;
         public float sampleRate;
 
+        //User info
+        public UserInfo user;
+
+        //Avatar
+        public List<AvatarInfo> avatars;
+
+    }
+
+    [System.Serializable]
+    public class UserInfo
+    {
+        //Experiment sumarry
+        public string exit;
+        public float totaldutarion;
+
+        //Route
+        public float height;
         public List<PositionRotation> prs;
+    }
+
+    public class AvatarInfo
+    {
+        public string id;
+        public List<PositionRotation> prs;
+    }
+
+    public class Sign
+    {
+        public string id;
+        public StaticPosition pos;
+    }
+
+    public class Exit
+    {
+        public string id;
+        public StaticPosition pos;
     }
 
     [System.Serializable]
@@ -31,12 +72,18 @@ public class JsonWriter : MonoBehaviour
         public float timeStamp;
 
         public float posX;
-        public float posY;
         public float posZ;
 
         public float rotX;
         public float rotY;
         public float rotZ;
+    }
+
+    [System.Serializable]
+    public class StaticPosition
+    {
+        public float posX;
+        public float posZ;
     }
 
     private MyData data;
@@ -53,33 +100,17 @@ public class JsonWriter : MonoBehaviour
         data.minute = DateTime.Now.Minute;
         data.second = DateTime.Now.Second;
 
+        data.user = new UserInfo();
         data.prs = new List<PositionRotation>();
 
     }
 
-    public void setSDK(string newsdk) {
-        data.sdk = newsdk;
+    public void setID(string id) {
+        data.id = id;
     }
 
     public void setSampleRate(float sample) {
         data.sampleRate = sample;
-    }
-
-    public void setPositionRotation(Transform transform) {
-        //Debug.Log(Mathf.Round(transform.position.x * 10) / 10);
-        PositionRotation register = new PositionRotation
-        {
-            //posX = Mathf.Round(transform.position.x * 10) / 10,
-            //posY = Mathf.Round(transform.position.y * 10) / 10,
-            //posZ = Mathf.Round(transform.position.z * 10) / 10,
-
-            //rotX = Mathf.Round(transform.rotation.x * 10) / 10,
-            //rotY = Mathf.Round(transform.rotation.y * 10) / 10,
-            //rotZ = Mathf.Round(transform.rotation.z * 10) / 10,
-
-        };
-        
-        data.prs.Add(register);
     }
 
     public void setPositionRotation2(float px, float py, float pz, float rx, float ry, float rz, float ts)
