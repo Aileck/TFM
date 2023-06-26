@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 65871060103081220}
   m_Layer: 0
   m_Name: FloorEnd
-  m_TagString: Untagged
+  m_TagString: EndOfPath
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

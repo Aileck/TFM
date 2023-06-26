@@ -628,6 +628,7 @@ GameObject:
   - component: {fileID: 2740680493481329448}
   - component: {fileID: 3935754113000904939}
   - component: {fileID: 8228863301790495743}
+  - component: {fileID: 8475152719428515944}
   m_Layer: 0
   m_Name: Business_Male_08_facial
   m_TagString: Avatar
@@ -964,6 +965,19 @@ MonoBehaviour:
   wallAvoidFalloff: 1
   priority: 0.5
   debug: 1
+--- !u!114 &8475152719428515944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1355024631542937706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e135732d7d2df94790c2c23d7e6ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 15
 --- !u!1 &1415846573153464358
 GameObject:
   m_ObjectHideFlags: 0

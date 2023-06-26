@@ -62,32 +62,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\ArguingMusicController.cs" />
-    <Compile Include="Assets\ChangeScene.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\External\QA_Office\Scripts\ElevatorManager.cs" />
-    <Compile Include="Assets\GazeEssential.cs" />
-    <Compile Include="Assets\MusicController.cs" />
-    <Compile Include="Assets\OfficeSceneManager.cs" />
-    <Compile Include="Assets\PlayerController.cs" />
     <Compile Include="Assets\Samples\Tobii XR SDK\3.0.1\Getting Started\Scripts\HighlightAtGaze.cs" />
+    <Compile Include="Assets\Scipt\ArguingMusicController.cs" />
     <Compile Include="Assets\Scipt\BusinessManGenerator.cs" />
+    <Compile Include="Assets\Scipt\ChangeScene.cs" />
+    <Compile Include="Assets\Scipt\EndOfPath.cs" />
     <Compile Include="Assets\Scipt\Example.cs" />
+    <Compile Include="Assets\Scipt\ExperimentParameter.cs" />
     <Compile Include="Assets\Scipt\GameManager\LevelManager.cs" />
     <Compile Include="Assets\Scipt\GameManager\SceneManager.cs" />
+    <Compile Include="Assets\Scipt\GazeEssential.cs" />
+    <Compile Include="Assets\Scipt\GazeSign.cs" />
     <Compile Include="Assets\Scipt\GenericModel.cs" />
+    <Compile Include="Assets\Scipt\ID.cs" />
     <Compile Include="Assets\Scipt\JsonReader.cs" />
     <Compile Include="Assets\Scipt\JsonWriter.cs" />
+    <Compile Include="Assets\Scipt\LoadScene.cs" />
+    <Compile Include="Assets\Scipt\Menu.cs" />
     <Compile Include="Assets\Scipt\ModelCollector.cs" />
     <Compile Include="Assets\Scipt\ModelCollector1.cs" />
     <Compile Include="Assets\Scipt\Movment.cs" />
+    <Compile Include="Assets\Scipt\MusicController.cs" />
     <Compile Include="Assets\Scipt\NPCBehaviour.cs" />
     <Compile Include="Assets\Scipt\NPCBehaviour2.cs" />
     <Compile Include="Assets\Scipt\NPCGenerator.cs" />
-    <Compile Include="Assets\SoundController.cs" />
-    <Compile Include="Assets\UserBehaviorRegister.cs" />
+    <Compile Include="Assets\Scipt\OfficeSceneManager.cs" />
+    <Compile Include="Assets\Scipt\PlayerController.cs" />
+    <Compile Include="Assets\Scipt\ScreenShot.cs" />
+    <Compile Include="Assets\Scipt\SoundController.cs" />
+    <Compile Include="Assets\Scipt\UserBehaviorRegister.cs" />
     <Compile Include="Assets\VRMovment.cs" />
     <Compile Include="Assets\ViveSR\Scripts\Eye\SRanipal_Eye.cs" />
     <Compile Include="Assets\ViveSR\Scripts\Eye\SRanipal_EyeData.cs" />

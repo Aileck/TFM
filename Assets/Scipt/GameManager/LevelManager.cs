@@ -10,11 +10,13 @@ public class LevelManager : MonoBehaviour
     // Start is called before the first frame update
     [Header("IF ON FIRE")]
     [Tooltip("Actual situation")]
-    [SerializeField] 
+    [SerializeField]
     bool onFire = false;
 
     [SerializeField]
     bool endgame = false;
+
+    string exit;
 
     [SerializeField]
     int timeToFire = 5;
@@ -28,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public bool playerInOffice1;
 
     public JsonWriter json;
+    
 
 
 
@@ -41,13 +44,24 @@ public class LevelManager : MonoBehaviour
             fireText.enabled = true;
             countDownText.enabled = true;
         }
-        else {
+        else
+        {
             fireText.enabled = false;
             countDownText.enabled = false;
         }
 
-        StartCoroutine(Countdown(timeToFire));
+        //Initialize JSON
         StartCoroutine(StartAfterSceneLoad());
+
+        //Count down
+        StartCoroutine(Countdown(timeToFire));
+
+        //Register path user
+        StartCoroutine(RegisterPathUser());
+
+        //Register path avatar
+        StartCoroutine(RegisterPathAvatar());
+
 
     }
 
@@ -66,14 +80,21 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
             endgame = true;
 
         }
 
-        if (endgame) {
+        if (endgame)
+        {
+            ExitChoice(exit);
             json.GenerateJSON();
         }
+    }
+
+    public void ExitChoice(string i) {
+        json.setPlayerExit(i);
     }
 
     public static bool inoffice1
@@ -112,6 +133,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+
+    public static string exitChoice
+    {
+        get
+        {
+            return instance.exit;
+        }
+        set
+        {
+            instance.exit = value;
+        }
+    }
+
     public static JsonWriter jsonUtility
     {
         get
@@ -125,23 +159,44 @@ public class LevelManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
 
+        GameObject parameters = GameObject.FindGameObjectWithTag("Parameters");
+        if  (parameters != null){
+            Debug.Log("Parameter Loades");
+            json.setID(parameters.GetComponent<ExperimentParameter>().id);
+            json.setCondition(parameters.GetComponent<ExperimentParameter>().avatar, parameters.GetComponent<ExperimentParameter>().training);
+            json.setGroup(parameters.GetComponent<ExperimentParameter>().group);
+
+            //Handle condition:avatar
+            if (!parameters.GetComponent<ExperimentParameter>().avatar) {
+                foreach (GameObject g in GameObject.FindGameObjectsWithTag("Avatar"))
+                {
+                    g.SetActive(false);
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Critical error, no group detected");
+        }
         //Set up json
-        //json.setID("");
-        //json.setCondition("true, false");
-        //json.setGroup("");
+
         json.setTimeBeforeTimber(timeToFire);
         json.setSampleRate(samplerate);
 
+        //User
+        GameObject user = GameObject.FindGameObjectWithTag("Player");
+        json.setUserHeight(user.transform.position.y);
+
         //Avatar
-        foreach(GameObject g in GameObject.FindGameObjectsWithTag("Avatar")) {
-            Debug.Log("Le");
-            json.createAvatar(g.name);
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("Avatar"))
+        {
+            json.createAvatar(g.GetComponent<ID>().id);
         }
 
         //Sign
         foreach (GameObject g in GameObject.FindGameObjectsWithTag("Sign"))
         {
-            json.createSign(g.name, g.transform.position.x, g.transform.position.z);
+            json.createSign(g.GetComponent<ID>().id, g.transform.position.x, g.transform.position.z);
         }
 
         //Exit
@@ -155,7 +210,7 @@ public class LevelManager : MonoBehaviour
     }
 
 
-        IEnumerator Countdown( int time)
+    IEnumerator Countdown(int time)
     {
         while (time >= 0)
         {
@@ -166,8 +221,53 @@ public class LevelManager : MonoBehaviour
             time--;
         }
         fire = true;
-            fireText.text = "Fire";
-            fireText.color = Color.red;
+        fireText.text = "Fire";
+        fireText.color = Color.red;
     }
-    
+
+    IEnumerator RegisterPathUser()
+    {
+        while (!end)
+        {
+            yield return new WaitForSeconds(samplerate);
+
+            GameObject user = GameObject.FindGameObjectWithTag("Player");
+
+            float posX = user.transform.position.x;
+            float posZ = user.transform.position.z;
+
+            float rotX = user.transform.rotation.eulerAngles.x;
+            float rotY = user.transform.rotation.eulerAngles.y;
+            float rotZ = user.transform.rotation.eulerAngles.z;
+
+            json.setPositionRotation2(posX, posZ, rotX, rotY, rotZ, Time.time);
+
+        }
+
+    }
+
+    IEnumerator RegisterPathAvatar()
+    {
+        while (!end)
+        {
+            yield return new WaitForSeconds(samplerate);
+
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("Avatar"))
+            {
+                float posX = g.transform.position.x;
+                float posZ = g.transform.position.z;
+
+                float rotX = g.transform.rotation.eulerAngles.x;
+                float rotY = g.transform.rotation.eulerAngles.y;
+                float rotZ = g.transform.rotation.eulerAngles.z;
+
+                json.setPositionRotationAvatar(g.GetComponent<ID>().id, posX, posZ, 
+                                                rotX, rotY, rotZ, 
+                                                Time.time);
+            }
+
+
+        }
+
+    }
 }

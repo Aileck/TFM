@@ -18,14 +18,23 @@ public class VRMovment : MonoBehaviour
     public ForceMode movmentMode;
     public float rotationY = 0f;
 
+    public LineRenderer lineRenderer;
+    //public float rotationX = 0f;
+
     //Rotation
     //private SteamVR_TrackedObject trackedObj;
     //private SteamVR_Controller.Device device;
 
     private void Start()
     {
+        lineRenderer.SetPosition(0, new Vector3(22,1,-3));
+        lineRenderer.SetPosition(1, new Vector3(22, 1, -3));
+        lineRenderer.startWidth = 0.2f;
+        lineRenderer.endWidth = 0.2f;
+
+
         if (KeyboardMode) {
-            Cursor.lockState = CursorLockMode.Locked;
+            //Cursor.lockState = CursorLockMode.Locked;
 
             this.transform.position = new Vector3(this.transform.position.x,
                                                   1,
@@ -45,7 +54,7 @@ public class VRMovment : MonoBehaviour
             KeyboardMovment();
             KeyboardRotation();
         }
-
+        UpdateLine();
     }
 
     private void Movment() {
@@ -54,6 +63,8 @@ public class VRMovment : MonoBehaviour
 
         if (touchpadValue != Vector2.zero)
         {
+            Debug.Log(touchpadValue);
+
             Vector3 cameraPosition = vrCamera.position;
 
             touchpadValue *= trackpadSensitivity;
@@ -78,7 +89,6 @@ public class VRMovment : MonoBehaviour
         float touchpadY = Input.GetAxis("Vertical");
         Vector2 touchpadValue = new Vector2(touchpadX, touchpadY);
 
-        Debug.Log(touchpadValue);
         if (touchpadValue != Vector2.zero)
         {
             Vector3 cameraPosition = vrCamera.position;
@@ -97,9 +107,10 @@ public class VRMovment : MonoBehaviour
         float mouseY = Input.GetAxis("Mouse Y") * trackpadSensitivity * Time.deltaTime;
 
         rotationY -= mouseX;
+        //rotationX -= mouseY;
         //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.localRotation = Quaternion.Euler(0f, -rotationY, 0f);
+        transform.localRotation = Quaternion.Euler(0, -rotationY, 0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -107,5 +118,14 @@ public class VRMovment : MonoBehaviour
         if (other.GetComponent<ChangeScene>() != null) {
             other.GetComponent<ChangeScene>().SwitchScene();
         }
+    }
+
+    void UpdateLine() {
+
+            lineRenderer.positionCount++;
+            lineRenderer.SetPosition(lineRenderer.positionCount-1, vrCamera.position);
+            
+        
+
     }
 }

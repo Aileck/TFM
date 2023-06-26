@@ -1814,6 +1814,7 @@ GameObject:
   - component: {fileID: -3210308071710700198}
   - component: {fileID: 7345380364337286991}
   - component: {fileID: -8022438258016350264}
+  - component: {fileID: -5138280965174528997}
   m_Layer: 0
   m_Name: Business_Female_03_facial
   m_TagString: Avatar
@@ -2150,6 +2151,19 @@ MonoBehaviour:
   wallAvoidFalloff: 1
   priority: 0.5
   debug: 1
+--- !u!114 &-5138280965174528997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6151309776354544879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e135732d7d2df94790c2c23d7e6ce9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 3
 --- !u!1 &6185501411049292037
 GameObject:
   m_ObjectHideFlags: 0

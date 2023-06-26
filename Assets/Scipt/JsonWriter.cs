@@ -6,6 +6,7 @@ using System;
 
 public class JsonWriter : MonoBehaviour
 {
+    public ScreenShot ss;
     [System.Serializable]
     public class MyData
     {
@@ -74,10 +75,12 @@ public class JsonWriter : MonoBehaviour
     {
         public string id;
         public StaticPosition pos;
+        public List<LookDuration> durations;
 
         public Sign(string id, float posX, float posZ) {
             this.id = id;
             this.pos = new StaticPosition(posX, posZ);
+            this.durations = new List<LookDuration>();
         }
     }
 
@@ -129,6 +132,19 @@ public class JsonWriter : MonoBehaviour
         }
     }
 
+    [System.Serializable]
+    public class LookDuration
+    {
+        public float timestamp;
+        public float duration;
+
+        public LookDuration(float timestamp, float duration)
+        {
+            this.timestamp = timestamp;
+            this.duration = duration;
+        }
+    }
+
     private MyData data;
     private string filename;
 
@@ -159,13 +175,11 @@ public class JsonWriter : MonoBehaviour
         data.id = id;
     }
 
-    public void setCondition(bool training, bool avatar) {
+    public void setCondition(bool avatar, bool training) {
         //Parameter
         data.training = training;
         data.avatar = avatar;
- 
-        //public float sampleRate;
-    }
+     }
 
     public void setGroup(string group) {
         data.group = group;
@@ -177,6 +191,11 @@ public class JsonWriter : MonoBehaviour
 
     public void setSampleRate(float sample) {
         data.sampleRate = sample;
+    }
+
+    public void setPlayerExit(string exit)
+    {
+        data.user.exit = exit;
     }
 
     public void createAvatar(string id) {
@@ -193,8 +212,11 @@ public class JsonWriter : MonoBehaviour
         data.exits.Add(new Exit(id, posX, posZ));
     }
 
+    public void setUserHeight(float py) {
+        data.user.height = py;
+    }
 
-    public void setPositionRotation2(float px, float py, float pz, float rx, float ry, float rz, float ts)
+    public void setPositionRotation2(float px,  float pz, float rx, float ry, float rz, float ts)
     {
         PositionRotation register = new PositionRotation
         {
@@ -211,19 +233,45 @@ public class JsonWriter : MonoBehaviour
         data.user.prs.Add(register);
     }
 
+    public void setPositionRotationAvatar(string id, float px, float pz, float rx, float ry, float rz, float ts)
+    {
+        PositionRotation register = new PositionRotation
+        {
+            timeStamp = ts,
+            posX = ((Mathf.Round(px) * 10) / 10),
+            posZ = ((Mathf.Round(pz) * 10) / 10),
+
+            rotX = ((Mathf.Round(rx) * 10) / 10),
+            rotY = ((Mathf.Round(ry) * 10) / 10),
+            rotZ = ((Mathf.Round(rz) * 10) / 10),
+
+        };
+
+        data.avatars.Find(avatar => avatar.id == id).prs.Add(register);
+    }
+
+    public void setTimer(string id, float timestamp, float duration) {
+        data.signs.Find(sign => sign.id == id).durations.Add(new LookDuration(timestamp, duration));
+    }
+
     public void GenerateJSON() {
         if (!generated) {
+            TimeSpan timeDiff = DateTime.Now - data.time;
+            data.user.totalduration = (int)timeDiff.TotalSeconds;
+
             string jsonString = JsonUtility.ToJson(data);
 
             string filePath = Path.Combine(Application.persistentDataPath,
                 data.day.ToString() + data.month.ToString() +
-                data.hour.ToString() + data.minute.ToString() + data.second.ToString() +
-                ".json");
-            File.WriteAllText(filePath, jsonString);
+                data.hour.ToString() + data.minute.ToString() + data.second.ToString());
+            File.WriteAllText(filePath + ".json", jsonString);
 
             Debug.Log("JSON file written to: " + filePath);
 
-            TimeSpan timeDiff = DateTime.Now - data.time;
+            if (ss != null) {
+                ss.TakeScreenshot(filePath);
+            }
+
             Debug.Log("Total recording time: " + (int)timeDiff.TotalSeconds);
 
             generated = true;
