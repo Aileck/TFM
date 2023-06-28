@@ -1719,7 +1719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.5
+  radius: 0.4
   height: 2
   canMove: 1
   maxSpeed: 1.5
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   lockWhenNotMoving: 0
   agentTimeHorizon: 2
   obstacleTimeHorizon: 2
-  maxNeighbours: 10
+  maxNeighbours: 11
   layer: 1
   collidesWith: -1
   wallAvoidForce: 1
