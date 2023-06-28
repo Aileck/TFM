@@ -63,8 +63,8 @@ public class Menu : MonoBehaviour
         Instantiate(parameters);
         Object.DontDestroyOnLoad(parameters);
 
-        StartCoroutine(LoadScene());
-        UnityEngine.SceneManagement.SceneManager.LoadScene("Office");
+        //StartCoroutine(LoadScene());
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial");
     }
 
     IEnumerator LoadScene()

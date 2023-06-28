@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using Pathfinding.RVO;
 
 
 public class NPCBehaviour2 : MonoBehaviour
@@ -50,6 +51,9 @@ public class NPCBehaviour2 : MonoBehaviour
 
     void Start()
     {
+        if (myPos != GenericModel.POSITION.MOVEMENT) {
+            this.GetComponent<RVOController>().enabled = false;
+        }
         pathfinding = this.GetComponent<AIDestinationSetter>();
         anim = this.GetComponent<Animator>();
         ai = this.GetComponent<RichAI>();
@@ -215,13 +219,14 @@ public class NPCBehaviour2 : MonoBehaviour
             ai.canMove = true;
 
             //ai.maxSpeed = moveSpeed; 
+            this.GetComponent<RVOController>().enabled = true;
             ai.maxSpeed = 1;
 
             if ( ai.remainingDistance <= 1f)
             {
                 this.myState = State.GOTO_OUT;
                 pathfinding.target = GameObject.FindGameObjectWithTag(myFireDestination).transform;
-
+                
             }
         }
 
@@ -229,7 +234,10 @@ public class NPCBehaviour2 : MonoBehaviour
         if (LevelManager.fire && myState == State.GOTO_OUT)
         {
 
-            ai.maxSpeed = moveSpeed; 
+            ai.maxSpeed = moveSpeed;
+
+            //Avoid foot sliding
+            anim.speed = moveSpeed * 0.7f;
 
             if (ai.remainingDistance <= 0.1f)
             {

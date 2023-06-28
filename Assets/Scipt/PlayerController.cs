@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Scene2");
         }
 
-        if (other.tag == "EndOfPath") {
+        if (other.tag == "EndFloor") {
             LevelManager.end = true;
 
             endNotice.SetActive(true);

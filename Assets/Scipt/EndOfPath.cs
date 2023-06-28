@@ -19,8 +19,9 @@ public class EndOfPath : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player") {
-            LevelManager.end = true;
+
             LevelManager.exitChoice = this.GetComponent<ID>().id;
+            LevelManager.end = true;
         }
     }
 }

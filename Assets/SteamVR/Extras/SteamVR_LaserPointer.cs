@@ -103,6 +103,7 @@ namespace Valve.VR.Extras
             RaycastHit hit;
             bool bHit = Physics.Raycast(raycast, out hit);
 
+
             if (previousContact && previousContact != hit.transform)
             {
                 PointerEventArgs args = new PointerEventArgs();

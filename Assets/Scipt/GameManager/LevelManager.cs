@@ -16,7 +16,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     bool endgame = false;
 
-    string exit;
+    public string exit = "";
 
     [SerializeField]
     int timeToFire = 5;
@@ -88,13 +88,35 @@ public class LevelManager : MonoBehaviour
 
         if (endgame)
         {
-            ExitChoice(exit);
+            ExitChoice();
             json.GenerateJSON();
         }
     }
 
-    public void ExitChoice(string i) {
-        json.setPlayerExit(i);
+    public void ExitChoice() {
+        //Debug.Log(exit);
+        if (exit == "") {
+            string localExit = "";
+            float minDistance = 0f;
+            foreach (GameObject g in GameObject.FindGameObjectsWithTag("EndFloor"))
+            {
+                float distance = Vector3.Distance(g.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position);
+                if (localExit != "")
+                {
+                    if (distance < minDistance) {
+                        localExit = g.GetComponent<ID>().id;
+                        minDistance = distance;
+                    }
+
+                }
+                else {
+                    localExit = g.GetComponent<ID>().id;
+                    minDistance = distance;
+                }
+            }
+            exit = localExit;
+        }
+        json.setPlayerExit(exit);
     }
 
     public static bool inoffice1
@@ -130,6 +152,7 @@ public class LevelManager : MonoBehaviour
         set
         {
             instance.endgame = value;
+            Debug.Log("chanmge end");
         }
     }
 
@@ -142,6 +165,7 @@ public class LevelManager : MonoBehaviour
         }
         set
         {
+            Debug.Log("chanmge exitChoice");
             instance.exit = value;
         }
     }
@@ -166,6 +190,8 @@ public class LevelManager : MonoBehaviour
             json.setCondition(parameters.GetComponent<ExperimentParameter>().avatar, parameters.GetComponent<ExperimentParameter>().training);
             json.setGroup(parameters.GetComponent<ExperimentParameter>().group);
 
+            Debug.Log("Experiment group " + parameters.GetComponent<ExperimentParameter>().group);
+
             //Handle condition:avatar
             if (!parameters.GetComponent<ExperimentParameter>().avatar) {
                 foreach (GameObject g in GameObject.FindGameObjectsWithTag("Avatar"))
@@ -177,6 +203,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             Debug.LogError("Critical error, no group detected");
+            json.setGroup("NO_INFORMATION");
         }
         //Set up json
 
@@ -200,12 +227,10 @@ public class LevelManager : MonoBehaviour
         }
 
         //Exit
-        GameObject e1 = GameObject.FindGameObjectWithTag("Door1");
-        json.createExit("1", e1.transform.position.x, e1.transform.position.z);
-
-        //Exit
-        GameObject e2 = GameObject.FindGameObjectWithTag("Door2");
-        json.createExit("2", e2.transform.position.x, e2.transform.position.z);
+        foreach (GameObject g in GameObject.FindGameObjectsWithTag("EndFloor"))
+        {
+            json.createExit(g.GetComponent<ID>().id, g.transform.position.x, g.transform.position.z);
+        }
 
     }
 

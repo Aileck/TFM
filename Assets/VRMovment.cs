@@ -27,10 +27,13 @@ public class VRMovment : MonoBehaviour
 
     private void Start()
     {
-        lineRenderer.SetPosition(0, new Vector3(22,1,-3));
-        lineRenderer.SetPosition(1, new Vector3(22, 1, -3));
-        lineRenderer.startWidth = 0.2f;
-        lineRenderer.endWidth = 0.2f;
+        if (lineRenderer != null) {
+            lineRenderer.SetPosition(0, new Vector3(22, 1, -3));
+            lineRenderer.SetPosition(1, new Vector3(22, 1, -3));
+            lineRenderer.startWidth = 0.2f;
+            lineRenderer.endWidth = 0.2f;
+
+        }
 
 
         if (KeyboardMode) {
@@ -54,27 +57,30 @@ public class VRMovment : MonoBehaviour
             KeyboardMovment();
             KeyboardRotation();
         }
-        UpdateLine();
+
+        if(lineRenderer != null)
+            UpdateLine();
     }
 
     private void Movment() {
         // Comprobamos si el touchpad ha sido pulsado
-        Vector2 touchpadValue = touchpadAction.GetAxis(SteamVR_Input_Sources.Any);
+        if (LevelManager.instance == null || LevelManager.fire) {
+            Vector2 touchpadValue = touchpadAction.GetAxis(SteamVR_Input_Sources.Any);
 
-        if (touchpadValue != Vector2.zero)
-        {
-            Debug.Log(touchpadValue);
+            if (touchpadValue != Vector2.zero)
+            {
 
-            Vector3 cameraPosition = vrCamera.position;
+                Vector3 cameraPosition = vrCamera.position;
 
-            touchpadValue *= trackpadSensitivity;
+                touchpadValue *= trackpadSensitivity;
 
-            Vector3 forceDirection = vrCamera.transform.forward * touchpadValue.y + vrCamera.transform.right * touchpadValue.x;
-            forceDirection.Normalize();
+                Vector3 forceDirection = vrCamera.transform.forward * touchpadValue.y + vrCamera.transform.right * touchpadValue.x;
+                forceDirection.Normalize();
 
-            // Aplicamos la fuerza en la dirección calculada
-            this.GetComponent<Rigidbody>().AddForce(forceDirection * movementSpeed, movmentMode);
+                // Aplicamos la fuerza en la dirección calculada
+                this.GetComponent<Rigidbody>().AddForce(forceDirection * movementSpeed, movmentMode);
 
+            }
         }
     }
 

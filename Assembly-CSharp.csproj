@@ -73,6 +73,7 @@
     <Compile Include="Assets\Scipt\EndOfPath.cs" />
     <Compile Include="Assets\Scipt\Example.cs" />
     <Compile Include="Assets\Scipt\ExperimentParameter.cs" />
+    <Compile Include="Assets\Scipt\FixCameraWhenLoad.cs" />
     <Compile Include="Assets\Scipt\GameManager\LevelManager.cs" />
     <Compile Include="Assets\Scipt\GameManager\SceneManager.cs" />
     <Compile Include="Assets\Scipt\GazeEssential.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\Scipt\ID.cs" />
     <Compile Include="Assets\Scipt\JsonReader.cs" />
     <Compile Include="Assets\Scipt\JsonWriter.cs" />
+    <Compile Include="Assets\Scipt\Laserinput.cs" />
     <Compile Include="Assets\Scipt\LoadScene.cs" />
     <Compile Include="Assets\Scipt\Menu.cs" />
     <Compile Include="Assets\Scipt\ModelCollector.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="Assets\Scipt\NPCGenerator.cs" />
     <Compile Include="Assets\Scipt\OfficeSceneManager.cs" />
     <Compile Include="Assets\Scipt\PlayerController.cs" />
+    <Compile Include="Assets\Scipt\Pointer.cs" />
     <Compile Include="Assets\Scipt\ScreenShot.cs" />
     <Compile Include="Assets\Scipt\SoundController.cs" />
     <Compile Include="Assets\Scipt\UserBehaviorRegister.cs" />

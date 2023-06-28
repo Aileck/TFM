@@ -19,10 +19,12 @@ public class MusicController : MonoBehaviour
 
     Scene currentScene;
 
-    void Start()
+    void Awake()
     {
         
         audio = this.GetComponent<AudioSource>();
+        audio.volume = 0;
+        StartCoroutine(StartAfterSceneLoad());
         currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
 
         for (int i = 0; i < stringArray.Length; i++)
@@ -30,8 +32,10 @@ public class MusicController : MonoBehaviour
             string str = stringArray[i];
             AudioClip clip = audioClipArray[i];
 
+
             clips.Add(str, clip);
         }
+        
     }
 
     // Update is called once per frame
@@ -53,7 +57,7 @@ public class MusicController : MonoBehaviour
         if (clips.TryGetValue(name, out clip))
         {
             nowPlaying = name;
-            audio.Play(); 
+
         }
         else
         {
@@ -61,6 +65,16 @@ public class MusicController : MonoBehaviour
         }
         return clip;
 
+    }
+
+    bool ifPause() {
+        if (GameObject.FindGameObjectsWithTag("Avatar").Length == 0)
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     void PlayBGM()
     {
@@ -71,6 +85,9 @@ public class MusicController : MonoBehaviour
                 audio.clip = GetMusic("office_atmosphere");
                 audio.loop = true;
                 audio.Play();
+
+
+                
             }
             else if (LevelManager.fire)
             {
@@ -79,7 +96,7 @@ public class MusicController : MonoBehaviour
 
                     audio.clip = GetMusic("office_fire_alarm");
                     audio.loop = false;
-                    audio.volume = 0.7f;
+                    audio.volume = 0.6f;
                     audio.Play();
 
 
@@ -88,7 +105,33 @@ public class MusicController : MonoBehaviour
                 {
                     if (!audio.isPlaying)
                     {
-                        audio.clip = GetMusic("office_shock");
+                        audio.clip = GetMusic("office_fire_alarm_2");
+                        audio.loop = false;
+                        audio.volume = 0.7f;
+                        audio.Play();
+
+
+                    }
+
+                }
+                if (nowPlaying == "office_fire_alarm_2")
+                {
+                    if (!audio.isPlaying)
+                    {
+                        audio.clip = GetMusic("office_fire_alarm_3");
+                        audio.loop = false;
+                        audio.volume = 0.8f;
+                        audio.Play();
+
+
+                    }
+
+                }
+                if (nowPlaying == "office_fire_alarm_3")
+                {
+                    if (!audio.isPlaying)
+                    {
+                        audio.clip = GetMusic("office_fire_alarm_4");
                         audio.loop = false;
                         audio.volume = 1f;
                         audio.Play();
@@ -97,15 +140,16 @@ public class MusicController : MonoBehaviour
                     }
 
                 }
-                if (nowPlaying == "office_shock")
+                if (nowPlaying == "office_fire_alarm_4")
                 {
                     if (!audio.isPlaying)
                     {
-                        audio.clip = GetMusic("office_nervous"); ;
-                        audio.loop = true;
+                        audio.clip = GetMusic("office_nervous");
+                        audio.loop = false;
+                        audio.volume = 1f;
                         audio.Play();
 
-                        initialAvatarNum = GameObject.FindGameObjectsWithTag("Avatar").Length;
+
                     }
 
                 }
@@ -114,9 +158,6 @@ public class MusicController : MonoBehaviour
                     float newVolume = ((float)avatarNum / (float)initialAvatarNum);
                     audio.volume = newVolume;
 
-                    Debug.Log("Initial: " + (initialAvatarNum));
-                    Debug.Log("Now: " + (avatarNum));
-                    Debug.Log("Now control volume: " + newVolume);
                 }
 
 
@@ -130,9 +171,10 @@ public class MusicController : MonoBehaviour
 
     }
 
+
     void PlaySFX()
     {
-        if (LevelManager.fire)
+        if (LevelManager.fire && (GameObject.FindGameObjectsWithTag("Avatar").Length != 0))
         {
             if (!audio.isPlaying && nowPlaying != "office_shock")
             {
@@ -155,6 +197,30 @@ public class MusicController : MonoBehaviour
         else {
 
         }
+    }
+
+    private IEnumerator StartAfterSceneLoad()
+    {
+        yield return new WaitForEndOfFrame();
+        GameObject parameters = GameObject.FindGameObjectWithTag("Parameters");
+        if (parameters != null)
+        {
+            bool sound = parameters.GetComponent<ExperimentParameter>().avatar;
+            if (sound)
+            {
+                audio.volume = 1;
+            }
+            else
+            {
+                audio.volume = 0;
+            }
+        }
+        else {
+            audio.volume = 1;
+        }
+
+        audio.Play();
+
     }
 }
 
