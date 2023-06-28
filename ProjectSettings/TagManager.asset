@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Door1
+  - Door2
+  - Office1
+  - Office2
+  - Avatar
+  - Checkpoint1
+  - Sign
+  - Elevator
+  - ElevatorButtonOpen
+  - ElevatorNumericButton
+  - ElevatorGoButton
+  - Parameters
+  - EndOfPath
+  - EndFloor
+  - UpCamera
   layers:
   - Default
   - TransparentFX
@@ -13,8 +28,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - decoration
+  - trail
   - 
   - 
   - 
