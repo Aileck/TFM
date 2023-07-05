@@ -262,8 +262,7 @@ public class JsonWriter : MonoBehaviour
             string jsonString = JsonUtility.ToJson(data);
 
             string filePath = Path.Combine(Application.persistentDataPath,
-                data.day.ToString() + data.month.ToString() +
-                data.hour.ToString() + data.minute.ToString() + data.second.ToString());
+                data.group + "_" + data.id);
             File.WriteAllText(filePath + ".json", jsonString);
 
             Debug.Log("JSON file written to: " + filePath);

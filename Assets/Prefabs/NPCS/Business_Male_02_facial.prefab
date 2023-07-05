@@ -545,6 +545,7 @@ GameObject:
   - component: {fileID: 2867940845277754689}
   - component: {fileID: -4006472853808856556}
   - component: {fileID: -1286726763998178985}
+  - component: {fileID: -6552273664042207069}
   m_Layer: 0
   m_Name: Business_Male_02_facial
   m_TagString: Avatar
@@ -894,6 +895,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 76142406930b8f343843dbabb2b7aa89, type: 3}
   - {fileID: 8300000, guid: 52e741d80683e534da694176faab5bb5, type: 3}
   - {fileID: 8300000, guid: b1e65c6770925f841a74804c47769553, type: 3}
+--- !u!136 &-6552273664042207069
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1282246892162915362}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.24790172
+  m_Height: 1.7448308
+  m_Direction: 1
+  m_Center: {x: -0.0056168586, y: 0.8183247, z: 0}
 --- !u!1 &1312560004973617304
 GameObject:
   m_ObjectHideFlags: 0

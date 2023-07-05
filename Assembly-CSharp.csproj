@@ -68,6 +68,7 @@
     <Compile Include="Assets\External\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\Samples\Tobii XR SDK\3.0.1\Getting Started\Scripts\HighlightAtGaze.cs" />
     <Compile Include="Assets\Scipt\ArguingMusicController.cs" />
+    <Compile Include="Assets\Scipt\AvatarsJSONRoute.cs" />
     <Compile Include="Assets\Scipt\BusinessManGenerator.cs" />
     <Compile Include="Assets\Scipt\ChangeScene.cs" />
     <Compile Include="Assets\Scipt\EndOfPath.cs" />

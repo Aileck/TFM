@@ -8,6 +8,8 @@ public class VRMovment : MonoBehaviour
 
     // Movment
     public bool KeyboardMode;
+    public bool TestMode;
+
     public Transform vrCamera;
  
     public SteamVR_Action_Vector2 touchpadAction;
@@ -64,7 +66,7 @@ public class VRMovment : MonoBehaviour
 
     private void Movment() {
         // Comprobamos si el touchpad ha sido pulsado
-        if (LevelManager.instance == null || LevelManager.fire) {
+        if (LevelManager.instance == null || (LevelManager.fire || TestMode)) {
             Vector2 touchpadValue = touchpadAction.GetAxis(SteamVR_Input_Sources.Any);
 
             if (touchpadValue != Vector2.zero)

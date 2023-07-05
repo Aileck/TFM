@@ -1064,6 +1064,7 @@ GameObject:
   - component: {fileID: -5041677193347864314}
   - component: {fileID: -1453353859972980339}
   - component: {fileID: -2830805147410781064}
+  - component: {fileID: -3845104972570021338}
   m_Layer: 0
   m_Name: Construction_Female_01_facial
   m_TagString: Avatar
@@ -1413,6 +1414,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 76142406930b8f343843dbabb2b7aa89, type: 3}
   - {fileID: 8300000, guid: 52e741d80683e534da694176faab5bb5, type: 3}
   - {fileID: 8300000, guid: b1e65c6770925f841a74804c47769553, type: 3}
+--- !u!136 &-3845104972570021338
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656768431792657006}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.24790172
+  m_Height: 1.7448308
+  m_Direction: 1
+  m_Center: {x: -0.0056168586, y: 0.8183247, z: 0}
 --- !u!1 &4728724555127746825
 GameObject:
   m_ObjectHideFlags: 0
